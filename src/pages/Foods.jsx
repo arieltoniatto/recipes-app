@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import * as API from '../services/fetchMeals';
 import CardFoods from '../components/CardFoods';
 
+
 function Foods() {
   const [foodsCards, setFoodsCards] = useState([]);
 
