@@ -1,5 +1,5 @@
-const fetchByCategory = async () => {
-  const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+const fetchByAllFoods = async () => {
+  const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const request = await fetch(ENDPOINT);
   const requestJson = await request.json();
   return requestJson;
@@ -38,7 +38,7 @@ const fetchImage = async (ingredientName) => {
 };
 
 export {
-  fetchByCategory,
+  fetchByAllFoods,
   fetchByNationality,
   fetchByIngredients,
   fetchByName,

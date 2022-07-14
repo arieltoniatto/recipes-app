@@ -5,8 +5,6 @@ import appContext from './appContext';
 const INITIAL_STATE_USER = {
   email: '',
   senha: '',
-  mealsToken: '',
-  cocktailsToken: '',
 };
 
 function AppProvider({ children }) {

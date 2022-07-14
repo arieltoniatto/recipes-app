@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import appContext from '../context/appContext';
+import './Login.css';
 
 const INITIAL_STATE_TOKENS = {
   mealsToken: 1,
@@ -30,6 +31,7 @@ function Login() {
   }
 
   useEffect(() => {
+    console.log('aqui');
     const EMAIL_VALI = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/img;
     const MIN_PASSWORD = 6;
     if (EMAIL_VALI.test(email) && senha.length > MIN_PASSWORD) {
@@ -39,32 +41,44 @@ function Login() {
 
   return (
     <>
-      <label htmlFor="email">
-        <input
-          id="email"
-          type="text"
-          value={ email }
-          onChange={ ({ target: { value } }) => setEmail(value) }
-          data-testid="email-input"
-        />
-      </label>
-      <label htmlFor="senha">
-        <input
-          id="senha"
-          type="password"
-          value={ senha }
-          onChange={ ({ target: { value } }) => setSenha(value) }
-          data-testid="password-input"
-        />
-      </label>
-      <button
-        type="button"
-        onClick={ onHandleLogin }
-        disabled={ btnDisabled }
-        data-testid="login-submit-btn"
-      >
-        Entrar
-      </button>
+      <div className="logo-image" />
+      <div className="card-login">
+        <label htmlFor="email">
+          Email
+          <input
+            className="form-control"
+            placeholder="exemplo@exemplo.com"
+            id="email"
+            type="text"
+            value={ email }
+            onChange={ ({ target: { value } }) => setEmail(value) }
+            data-testid="email-input"
+          />
+        </label>
+
+        <label htmlFor="senha">
+          Senha
+          <input
+            className="form-control"
+            placeholder="Senha"
+            id="senha"
+            type="password"
+            value={ senha }
+            onChange={ ({ target: { value } }) => setSenha(value) }
+            data-testid="password-input"
+          />
+        </label>
+
+        <button
+          className="btn"
+          type="button"
+          onClick={ onHandleLogin }
+          disabled={ btnDisabled }
+          data-testid="login-submit-btn"
+        >
+          Entrar
+        </button>
+      </div>
     </>
   );
 }

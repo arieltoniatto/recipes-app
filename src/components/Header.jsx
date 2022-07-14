@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header({ title, perfil, pesquisa }) {
-  // const [textBusca, setTextBusca] = useState('');
-  // const [inputState, setInputState] = useState(false);
+  const [inputState, setInputState] = useState(false);
 
   return (
     <div>
@@ -27,21 +27,14 @@ function Header({ title, perfil, pesquisa }) {
           </object>
         </Link>
       )}
+      {inputState && (
+        <SearchBar />
+      )}
       {pesquisa && (
         <div>
-          {/* {inputState && (
-            <label htmlFor="busca">
-              <input
-                type="text"
-                value={ textBusca }
-                id="busca"
-                onChange={ ({ target: { value } }) => setTextBusca(value) }
-              />
-            </label>
-          )} */}
           <button
             type="button"
-            // onClick={ () => setInputState(!inputState) }
+            onClick={ () => setInputState((prev) => !prev) }
           >
             <object
               type="image/svg+xml"
