@@ -1,17 +1,17 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Profile() {
+function FavoriteRecipes() {
   return (
     <div>
       <Header
-        title="Profile"
+        title="Favorite Recipes"
         perfil
         pesquisa={ false }
       />
-      <h1>Profile page</h1>
+      <h1>HOME FavoriteRecipes</h1>
     </div>
   );
 }
 
-export default Profile;
+export default FavoriteRecipes;

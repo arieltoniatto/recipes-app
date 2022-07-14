@@ -26,7 +26,7 @@ function Login() {
     };
     user.set(userInfor);
     localStorage.setItem('user', JSON.stringify(userInfor));
-    history.push('/home');
+    history.push('/foods');
   }
 
   useEffect(() => {

@@ -1,17 +1,17 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Drinks() {
+function DoneRecipes() {
   return (
     <div>
       <Header
-        title="Drinks"
+        title="Done Recipes"
         perfil
-        pesquisa
+        pesquisa={ false }
       />
-      <h1>HOME Drinks</h1>
+      <h1>HOME DoneRecipes</h1>
     </div>
   );
 }
 
-export default Drinks;
+export default DoneRecipes;
