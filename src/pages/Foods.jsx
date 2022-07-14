@@ -9,7 +9,7 @@ function Foods() {
         perfil
         pesquisa
       />
-      <h1>HOME PAG</h1>
+      <h1>Teste HOme</h1>
     </div>
   );
 }

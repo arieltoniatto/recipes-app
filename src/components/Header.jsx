@@ -5,6 +5,9 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header({ title, perfil, pesquisa }) {
+  // const [textBusca, setTextBusca] = useState('');
+  // const [inputState, setInputState] = useState(false);
+
   return (
     <div>
       <h1
@@ -25,13 +28,30 @@ function Header({ title, perfil, pesquisa }) {
         </Link>
       )}
       {pesquisa && (
-        <object
-          type="image/svg+xml"
-          data={ searchIcon }
-          data-testid="search-top-btn"
-        >
-          profileIco
-        </object>
+        <div>
+          {/* {inputState && (
+            <label htmlFor="busca">
+              <input
+                type="text"
+                value={ textBusca }
+                id="busca"
+                onChange={ ({ target: { value } }) => setTextBusca(value) }
+              />
+            </label>
+          )} */}
+          <button
+            type="button"
+            // onClick={ () => setInputState(!inputState) }
+          >
+            <object
+              type="image/svg+xml"
+              data={ searchIcon }
+              data-testid="search-top-btn"
+            >
+              profileIco
+            </object>
+          </button>
+        </div>
       )}
     </div>
   );

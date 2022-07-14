@@ -1,19 +1,39 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Router, MemoryRouter } from 'react-router-dom';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App'
-import AppProvider from '../context/AppProvider';
+import renderWithRouter from './Mocks/helpes/renderWithRouter';
+
 
 describe('', () => {
+    beforeEach(() => {
+        renderWithRouter(<App />)
+    })
+
   test('test login page', () => {
-    render(
-      <AppProvider>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </AppProvider>
-    )
-    const emailInput = screen.getByTestId("email-input")
+    const emailInput = screen.getByTestId("email-input");
+    const passwordInput = screen.getByTestId("password-input");
+    const loginBtn = screen.getByTestId("login-submit-btn");
+
     expect(emailInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
+    expect(loginBtn).toBeInTheDocument();
+    expect(loginBtn).toBeDisabled();
+
+    userEvent.type(emailInput, 'teste@teste.com')
+    userEvent.type(passwordInput, 'sen')
+    expect(loginBtn).toBeDisabled();
+
+    userEvent.type(passwordInput, 'senha123')
+    expect(loginBtn).not.toBeDisabled();
+
+    userEvent.clear(passwordInput)
+    expect(loginBtn).toBeDisabled();
+
+    userEvent.type(passwordInput, 'minhoca321')
+    userEvent.click(loginBtn)
+
+    const foodEl = screen.getByRole('heading', { name: /^foods$/i, level: 1 })
+    expect(foodEl).toBeInTheDocument();  
   })
 })
