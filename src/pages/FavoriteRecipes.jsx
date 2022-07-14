@@ -9,7 +9,7 @@ function FavoriteRecipes() {
         perfil
         pesquisa={ false }
       />
-      <h1>HOME FavoriteRecipes</h1>
+      {/* <h1>HOME FavoriteRecipes</h1> */}
     </div>
   );
 }

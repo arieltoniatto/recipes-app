@@ -35,6 +35,7 @@ function Header({ title, perfil, pesquisa }) {
           <button
             type="button"
             onClick={ () => setInputState((prev) => !prev) }
+            data-testid="search-btn"
           >
             <object
               type="image/svg+xml"

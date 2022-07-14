@@ -9,7 +9,7 @@ const INITIAL_STATE_TOKENS = {
 };
 
 function Login() {
-  const { user } = useContext(appContext);
+  const { user, load } = useContext(appContext);
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -27,6 +27,7 @@ function Login() {
     };
     user.set(userInfor);
     localStorage.setItem('user', JSON.stringify(userInfor));
+    load.set(true);
     history.push('/foods');
   }
 

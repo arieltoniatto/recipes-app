@@ -9,10 +9,15 @@ const INITIAL_STATE_USER = {
 
 function AppProvider({ children }) {
   const [user, setUser] = useState(INITIAL_STATE_USER);
+  const [load, setLoad] = useState(false);
   const appData = {
     user: {
       get: user,
       set: setUser,
+    },
+    load: {
+      get: load,
+      set: setLoad,
     },
   };
 
