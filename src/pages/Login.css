@@ -1,0 +1,19 @@
+.logo-image {
+  background-image: url('../images/food-logo.png');
+}
+
+.card-login {
+  align-items: center;
+  background-color: rgb(145, 145, 145);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  width: 70%;
+}
+
+.btn {
+  background-color: orangered;
+  border-radius: 30px;
+  width: 80%;
+}
