@@ -35,8 +35,23 @@
   box-shadow: 15px 15px 30px black;
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 95vh;
   justify-content: center;
+  overflow: scroll;
+  overflow-x: hidden;
   position: absolute;
   width: 480px;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

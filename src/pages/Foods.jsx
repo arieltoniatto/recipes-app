@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import * as API from '../services/fetchMeals';
 import CardFoods from '../components/CardFoods';
+import './Foods.css';
 
 function Foods() {
   const [foodsCards, setFoodsCards] = useState([]);
@@ -17,21 +18,22 @@ function Foods() {
   }, []);
 
   return (
-    <div>
+    <>
       <Header
         title="Foods"
         perfil
         pesquisa
       />
-      {foodsCards.map((food) => (
-        <CardFoods
-          key={ food.idMeal }
-          props={ { ...food } }
-          // dataTest={}
-        />
-      ))}
-      <h1>Teste HOme</h1>
-    </div>
+
+      <div className="foods">
+        {foodsCards.map((food) => (
+          <CardFoods
+            key={ food.idMeal }
+            props={ { ...food } }
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
