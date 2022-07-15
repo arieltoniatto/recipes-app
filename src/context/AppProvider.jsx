@@ -7,17 +7,21 @@ const INITIAL_STATE_USER = {
   email: '',
   senha: '',
 };
-
+const URL_FIST_REQUEST = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 function AppProvider({ children }) {
   const [user, setUser] = useState(INITIAL_STATE_USER);
   const [cardsList, setCardList] = useState([]);
 
+  // const requestFoods = async (URL) => {
+  //   const QTD_MAX = 12;
+  //   const itensList = await fetchByAllFoods(URL)
+  //     .then((responsejson) => responsejson.meals.slice(0, QTD_MAX));
+  //   setCardList(itensList);
+  // };
+
   useEffect(() => {
     const requestFoods = async () => {
-      const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-      const QTD_MAX = 12;
-      const itensList = await fetchByAllFoods(URL)
-        .then((responsejson) => responsejson.meals.slice(0, QTD_MAX));
+      const itensList = await fetchByAllFoods(URL_FIST_REQUEST, 'Foods');
       setCardList(itensList);
     };
     requestFoods();
@@ -28,7 +32,10 @@ function AppProvider({ children }) {
       get: user,
       set: setUser,
     },
-    cardsList,
+    cardsList: {
+      get: cardsList,
+      set: setCardList,
+    },
   };
 
   return (

@@ -16,7 +16,7 @@ function Foods() {
       />
 
       <div className="foods">
-        {cardsList.map((food) => (
+        {cardsList.get.map((food) => (
           <CardFoods
             key={ food.idMeal }
             props={ { ...food } }

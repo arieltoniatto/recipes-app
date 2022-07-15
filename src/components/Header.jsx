@@ -30,7 +30,7 @@ function Header({ title, perfil, pesquisa }) {
           {title}
         </h1>
         {inputState && (
-          <SearchBar />
+          <SearchBar title={ title } />
         )}
         {pesquisa && (
           <div>
