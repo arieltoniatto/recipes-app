@@ -39,8 +39,8 @@ function SearchBar() {
           />
         </label>
         <button
-          data-testid="search-top-btn"
           type="button"
+          data-testid="exec-search-btn"
         >
           Search
         </button>
