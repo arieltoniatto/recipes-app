@@ -5,48 +5,43 @@ import App from '../App'
 import renderWithRouter from './helpers/renderWithRouter';
 
 describe('test header component', () => {
-  let globalHistory;
-
-  beforeEach(() => {
-   const { history } = renderWithRouter(<App />)
-   globalHistory = history;
-})
 
   test('verify where header should appear', () => {
-    globalHistory.push('/foods')
+    const { history } = renderWithRouter(<App />, ['/foods'])
+
     let headerEl = screen.getByTestId('page-title')
     const headerBtn = screen.getByTestId("search-top-btn")
-    expect(globalHistory.location.pathname).toBe('/foods')
+    expect(history.location.pathname).toBe('/foods')
     expect(headerEl).toBeInTheDocument();
 
     userEvent.click(headerBtn)
 
-    globalHistory.push('/drinks')
+    history.push('/drinks')
 
     
-    expect(globalHistory.location.pathname).toBe('/drinks')
+    expect(history.location.pathname).toBe('/drinks')
     headerEl = screen.getByTestId('page-title')
     expect(headerEl).toBeInTheDocument();
 
-    globalHistory.push('/foods/1')
+    history.push('/foods/1')
     headerEl = screen.queryByTestId('page-title')
     expect(headerEl).not.toBeInTheDocument();
     
-    globalHistory.push('/drinks/1')
+    history.push('/drinks/1')
     headerEl = screen.queryByTestId('page-title')
     expect(headerEl).not.toBeInTheDocument();
 
-    globalHistory.push('/foods/1/in-progress')
+    history.push('/foods/1/in-progress')
     headerEl = screen.queryByTestId('page-title')
     expect(headerEl).not.toBeInTheDocument();
     
-    globalHistory.push('/drinks/1/in-progress')
+    history.push('/drinks/1/in-progress')
     headerEl = screen.queryByTestId('page-title')
     expect(headerEl).not.toBeInTheDocument();
 
   })
   test('verify what should appear on the profile, done recipes and favorite recipes page', () => {
-    globalHistory.push('/profile')
+    const { history } = renderWithRouter(<App />, ['/profile'])
 
     let profileEl = screen.getByTestId("profile-top-btn");
     let profileName = screen.getByRole('heading', { name: /^profile$/i, level: 1 })
@@ -56,7 +51,7 @@ describe('test header component', () => {
     expect(profileName).toBeInTheDocument();
     expect(screen.queryByTestId("search-top-btn")).not.toBeInTheDocument();
 
-    globalHistory.push('/done-recipes')
+    history.push('/done-recipes')
     profileEl = screen.getByTestId("profile-top-btn")
     profileLink = screen.getByTestId('profile-top-btn')
 
@@ -66,7 +61,7 @@ describe('test header component', () => {
     expect(doneRecipesName).toBeInTheDocument();
     expect(screen.queryByTestId("search-top-btn")).not.toBeInTheDocument();
 
-    globalHistory.push('/favorite-recipes')
+    history.push('/favorite-recipes')
     profileEl = screen.getByTestId("profile-top-btn")
     profileLink = screen.getByTestId('profile-top-btn')
 
