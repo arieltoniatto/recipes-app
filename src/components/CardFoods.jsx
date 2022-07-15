@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './CardFoods.css';
 
 function Card({ props: { strMeal, strMealThumb } }) {
   return (
-    <div>
-      <h4>{strMeal}</h4>
+    <div className="card-foods">
       <img src={ strMealThumb } alt={ strMeal } />
+      <h4>{strMeal}</h4>
+      <hr />
     </div>
   );
 }
