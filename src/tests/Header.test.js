@@ -23,6 +23,11 @@ describe('test header component', () => {
     headerEl = screen.getByTestId('page-title')
     expect(headerEl).toBeInTheDocument();
 
+    const btnProfileEl = screen.getByTestId('profile-top-btn')
+    userEvent.click(btnProfileEl)
+
+    expect(history.location.pathname).toBe('/profile')
+
     history.push('/foods/1')
     headerEl = screen.queryByTestId('page-title')
     expect(headerEl).not.toBeInTheDocument();

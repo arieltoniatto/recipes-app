@@ -35,12 +35,12 @@
   box-shadow: 15px 15px 30px black;
   display: flex;
   flex-direction: column;
-  height: 95vh;
+  height: 620px;
   justify-content: center;
   overflow: scroll;
   overflow-x: hidden;
   position: absolute;
-  width: 480px;
+  width: 300px;
 }
 
 ::-webkit-scrollbar {
