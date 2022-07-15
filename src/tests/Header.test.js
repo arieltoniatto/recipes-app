@@ -15,7 +15,7 @@ describe('test header component', () => {
   test('verify where header should appear', () => {
     globalHistory.push('/foods')
     let headerEl = screen.getByTestId('page-title')
-    const headerBtn = screen.getByTestId("search-btn")
+    const headerBtn = screen.getByTestId("search-top-btn")
     expect(globalHistory.location.pathname).toBe('/foods')
     expect(headerEl).toBeInTheDocument();
 
@@ -50,32 +50,29 @@ describe('test header component', () => {
 
     let profileEl = screen.getByTestId("profile-top-btn");
     let profileName = screen.getByRole('heading', { name: /^profile$/i, level: 1 })
-    let profileLink = screen.getByRole('link')
+    let profileLink = screen.getByTestId('profile-top-btn')
 
     expect(profileEl).toBeInTheDocument();
-    expect(profileLink).toHaveAttribute('href', '/profile')
     expect(profileName).toBeInTheDocument();
     expect(screen.queryByTestId("search-top-btn")).not.toBeInTheDocument();
 
     globalHistory.push('/done-recipes')
     profileEl = screen.getByTestId("profile-top-btn")
-    profileLink = screen.getByRole('link')
+    profileLink = screen.getByTestId('profile-top-btn')
 
     const doneRecipesName = screen.getByRole('heading', { name: /^Done Recipes$/i, level: 1 })
 
     expect(profileEl).toBeInTheDocument();
-    expect(profileLink).toHaveAttribute('href', '/profile')
     expect(doneRecipesName).toBeInTheDocument();
     expect(screen.queryByTestId("search-top-btn")).not.toBeInTheDocument();
 
     globalHistory.push('/favorite-recipes')
     profileEl = screen.getByTestId("profile-top-btn")
-    profileLink = screen.getByRole('link')
+    profileLink = screen.getByTestId('profile-top-btn')
 
     const favRecipesName = screen.getByRole('heading', { name: /^Favorite Recipes$/i, level: 1 })
 
     expect(profileEl).toBeInTheDocument();
-    expect(profileLink).toHaveAttribute('href', '/profile')
     expect(favRecipesName).toBeInTheDocument();
     expect(screen.queryByTestId("search-top-btn")).not.toBeInTheDocument();
   })

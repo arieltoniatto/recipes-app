@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
@@ -9,21 +9,20 @@ import './Header.css';
 function Header({ title, perfil, pesquisa }) {
   const [inputState, setInputState] = useState(false);
 
+  const history = useHistory();
+
   return (
     <div className="header">
       <header>
         {perfil && (
-          <Link to="/profile">
-            <img
-              src={ profileIcon }
-              alt="profile icon"
-              type="image/svg+xml"
-              data={ profileIcon }
-              data-testid="profile-top-btn"
-              id="pro"
-            />
-
-          </Link>
+          <input
+            src={ profileIcon }
+            alt="profile icon"
+            type="image"
+            data-testid="profile-top-btn"
+            onClick={ () => history.push('/profile') }
+            id="pro"
+          />
         )}
         <h1
           data-testid="page-title"
@@ -35,19 +34,13 @@ function Header({ title, perfil, pesquisa }) {
         )}
         {pesquisa && (
           <div>
-            <button
-              type="button"
+            <input
               onClick={ () => setInputState((prev) => !prev) }
-              data-testid="search-btn"
-            >
-              <img
-                src={ searchIcon }
-                alt="search icon"
-                type="image/svg+xml"
-                data={ searchIcon }
-                data-testid="search-top-btn"
-              />
-            </button>
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="search icon"
+              type="image"
+            />
           </div>
         )}
       </header>

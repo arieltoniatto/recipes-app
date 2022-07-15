@@ -2,11 +2,12 @@ import React from 'react';
 
 function SearchBar() {
   return (
-    <div>
+    <div data-testid="search-input">
       <label htmlFor="busca">
         <input
           type="text"
           id="busca"
+          data-testid="search-input"
         />
       </label>
       <div>
@@ -37,7 +38,12 @@ function SearchBar() {
             data-testid="first-letter-search-radio"
           />
         </label>
-        <button type="button">Search</button>
+        <button
+          data-testid="search-top-btn"
+          type="button"
+        >
+          Search
+        </button>
       </div>
     </div>
   );

@@ -2,11 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import appContext from '../context/appContext';
 import './Login.css';
-
-const INITIAL_STATE_TOKENS = {
-  mealsToken: 1,
-  cocktailsToken: 1,
-};
+import validationLogin from '../services/validacaoLogin';
 
 function Login() {
   const { user } = useContext(appContext);
@@ -14,29 +10,21 @@ function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const [tokens] = useState(INITIAL_STATE_TOKENS);
 
   const history = useHistory();
 
   function onHandleLogin() {
-    const userInfor = {
-      email,
-      senha,
-      mealsToken: tokens.mealsToken,
-      cocktailsToken: tokens.cocktailsToken,
-    };
-    user.set(userInfor);
-    localStorage.setItem('user', JSON.stringify(userInfor));
+    user.set({ email, senha });
+
+    localStorage.setItem('user', JSON.stringify({ email }));
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+
     history.push('/foods');
   }
 
   useEffect(() => {
-    console.log('aqui');
-    const EMAIL_VALI = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/img;
-    const MIN_PASSWORD = 6;
-    if (EMAIL_VALI.test(email) && senha.length > MIN_PASSWORD) {
-      setBtnDisabled(false);
-    } else if (!btnDisabled) setBtnDisabled(true);
+    setBtnDisabled(validationLogin(email, senha));
   }, [email, senha]);
 
   return (
