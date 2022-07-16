@@ -1,0 +1,5 @@
+.searchbar-container {
+  background-color: salmon;
+  flex-wrap: wrap;
+  margin-top: 10rem;
+}

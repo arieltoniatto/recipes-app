@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
+import appContext from '../context/appContext';
 import Header from '../components/Header';
-import * as API from '../services/fetchMeals';
 import CardFoods from '../components/CardFoods';
 import './Foods.css';
+import fetchByAllFoods from '../services/fetchRequest';
 
+const URL_FIST_REQUEST = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 function Foods() {
-  const [foodsCards, setFoodsCards] = useState([]);
+  const { cardsList: { set, get } } = useContext(appContext);
+
+  const memoryRequest = useCallback(() => {
+    const requestFoods = async () => {
+      const itensList = await fetchByAllFoods(URL_FIST_REQUEST, 'Foods');
+      set(itensList);
+    };
+    requestFoods();
+  }, [set]);
 
   useEffect(() => {
-    const foods = async () => {
-      const MAX_FOOD_QTD = 12;
-      const comidas = await API.fetchByAllFoods()
-        .then((response) => response.meals.slice(0, MAX_FOOD_QTD));
-      setFoodsCards(comidas);
-    };
-    foods();
-  }, []);
+    memoryRequest();
+  }, [memoryRequest]);
 
   return (
     <>
@@ -26,10 +30,12 @@ function Foods() {
       />
 
       <div className="foods">
-        {foodsCards.map((food) => (
+        {get.map((food, index) => (
           <CardFoods
+            index={ index }
             key={ food.idMeal }
-            props={ { ...food } }
+            img={ food.strMealThumb }
+            name={ food.strMeal }
           />
         ))}
       </div>

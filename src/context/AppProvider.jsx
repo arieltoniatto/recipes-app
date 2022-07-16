@@ -9,10 +9,21 @@ const INITIAL_STATE_USER = {
 
 function AppProvider({ children }) {
   const [user, setUser] = useState(INITIAL_STATE_USER);
+  const [cardsList, setCardList] = useState([]);
+  const [uniqueItem, setUniqueItem] = useState({});
+
   const appData = {
     user: {
       get: user,
       set: setUser,
+    },
+    cardsList: {
+      get: cardsList,
+      set: setCardList,
+    },
+    uniqueItem: {
+      get: uniqueItem,
+      set: setUniqueItem,
     },
   };
 

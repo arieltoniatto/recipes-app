@@ -5,5 +5,5 @@ const mockFetch = (mockParam = '') => {
       }));
   };
   
-  beforeEach(mockFetch);
-      afterEach(() => jest.clearAllMocks());
+  export default mockFetch;
+  
