@@ -30,9 +30,6 @@ function Header({ title, perfil, pesquisa }) {
         >
           {title}
         </h1>
-        {inputState && (
-          <SearchBar title={ title } />
-        )}
         {pesquisa && (
           <div>
             <input
@@ -44,6 +41,9 @@ function Header({ title, perfil, pesquisa }) {
               type="image"
             />
           </div>
+        )}
+        {inputState && (
+          <SearchBar title={ title } />
         )}
       </header>
     </div>
