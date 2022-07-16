@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useCallback } from 'react';
 import Header from '../components/Header';
 import appContext from '../context/appContext';
-import CardFoods from '../components/CardFoods';
+import Recipes from '../components/Recipes';
 import fetchByAllFoods from '../services/fetchRequest';
 import './Foods.css';
+import Footer from '../components/Footer';
 
 const URL_FIST_REQUEST = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 function Drinks() {
@@ -29,15 +30,12 @@ function Drinks() {
         pesquisa
       />
       <div className="foods">
-        {get.map((drink, index) => (
-          <CardFoods
-            index={ index }
-            key={ drink.idDrink }
-            img={ drink.strDrinkThumb }
-            name={ drink.strDrink }
-          />
-        ))}
+        <Recipes
+          list={ (get.length) ? get : undefined }
+          pag="Drinks"
+        />
       </div>
+      <Footer />
     </>
   );
 }

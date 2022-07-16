@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './CardFoods.css';
 
 function Card({ img, name, index }) {
   return (
@@ -18,7 +17,6 @@ function Card({ img, name, index }) {
       >
         {name}
       </h4>
-      <hr />
     </div>
   );
 }
