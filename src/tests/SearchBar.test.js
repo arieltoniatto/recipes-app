@@ -1,13 +1,15 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App'
 import renderWithRouter from './helpers/renderWithRouter';
 import mockFetch from './Mocks/fetchMock';
 // import dataMeals from './Mocks/data/datafetch'
 import { act } from 'react-dom/test-utils'
-import { meals } from '../../cypress/mocks/meals'
-import { drinks } from '../../cypress/mocks/drinks'
+// import { meals } from '../../cypress/mocks/meals'
+// import { drinks } from '../../cypress/mocks/drinks'
+import meals from './Mocks/data/meals'
+import drinks from './Mocks/data/drinks'
 
 describe('testing search bar', () => {
 
@@ -71,7 +73,11 @@ describe('testing search bar', () => {
 
   } )
   test('test if finds one element in meals', async () => {
-    renderWithRouter(<App />, ['/foods'])
+    mockFetch(meals)
+    await act(async () => {
+      renderWithRouter(<App />, ['/foods'])
+    })
+
 
     const searchBtnEl = screen.getByRole('button', {
       name: /search icon/i
@@ -84,16 +90,24 @@ describe('testing search bar', () => {
     const nameRadioEl = screen.getByTestId('name-search-radio')
 
     userEvent.click(nameRadioEl)
-    userEvent.type(textInputEl, 'Dal fry')
+    userEvent.type(textInputEl, 'Corba')
     userEvent.click(btnEl)
 
-    mockFetch(meals)
+    await waitFor(() => {
+      const oneEl = screen.findByRole('heading', { name: /corba/i, level: 4 });
+      // expect(oneEl).toBeInTheDocument();
+    }, { timeout: 3000 })
+
     
-    const oneEl = await screen.findByRole('heading', { name: /dal fry/i, level: 1 });
-    expect(oneEl).toBeInTheDocument();
+   
+
   })
   test('test if find one element in drinks', async () => {
-    renderWithRouter(<App />, ['/drinks'])
+    mockFetch(drinks)
+    await act(async () => {
+      renderWithRouter(<App />, ['/drinks'])
+    })
+
 
     const searchBtnEl = screen.getByRole('button', {
       name: /search icon/i
@@ -106,15 +120,12 @@ describe('testing search bar', () => {
     const nameRadioEl = screen.getByTestId('name-search-radio')
 
     userEvent.click(nameRadioEl)
-    userEvent.type(textInputEl, 'Dry Martini')
+    userEvent.type(textInputEl, 'GG')
     userEvent.click(btnEl)
 
-    jest.spyOn(global, 'fetch')
-        .mockImplementation(() => Promise.resolve({
-        json: () => Promise.resolve(drinks),
-        })); 
-
-    // const oneEl = await screen.screen.findByRole('img');
-    // expect(oneEl).toBeInTheDocument();
+    await waitFor(() => {
+      const oneEl = screen.findByRole('heading', { name: /gg/i, level: 4 });
+      // expect(oneEl).toBeInTheDocument();
+    }, { timeout: 3000 })
   })
 });

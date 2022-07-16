@@ -18,7 +18,6 @@ function Drinks() {
   }, [set]);
 
   useEffect(() => {
-    console.log('loooppp');
     memoryRequest();
   }, [memoryRequest]);
 
