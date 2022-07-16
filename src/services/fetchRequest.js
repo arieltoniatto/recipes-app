@@ -9,7 +9,7 @@ const fetchByAllFoods = async (URL, title) => {
   console.log((Boolean(request.meals) && Boolean(request.drinks)));
 
   if (!request.meals && !request.drinks) {
-    global.alert('Sorry, we haven\'t found any recipes for these filters');
+    global.alert('Sorry, we haven\'t found any recipes for these filters.');
     return null;
   }
   if (title === 'Foods') request = request.meals.slice(0, QTD_MAX);

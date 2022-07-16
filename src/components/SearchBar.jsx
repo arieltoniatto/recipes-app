@@ -102,7 +102,3 @@ export default SearchBar;
 SearchBar.propTypes = {
   title: PropTypes.string.isRequired,
 };
-
-// SearchBar.defaultProps = {
-//   title: '',
-// };
