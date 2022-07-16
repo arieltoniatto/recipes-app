@@ -1,13 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import foodFilter from '../services/fatchFilter';
+import foodFilter from '../services/fetchFilter';
 import appContext from '../context/appContext';
+import './SearchBar.css';
 
 function SearchBar({ title }) {
   const [inputText, setInputText] = useState('');
   const [radioButton, setRadioButton] = useState('ingredient');
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const { cardsList } = useContext(appContext);
+  const { cardsList, uniqueItem } = useContext(appContext);
+  const history = useHistory();
 
   useEffect(() => {
     const checkInput = () => {
@@ -19,10 +22,24 @@ function SearchBar({ title }) {
 
   async function onClickFilter() {
     const resp = await foodFilter(inputText, radioButton, title);
-    cardsList.set(resp);
+    if (resp) {
+      cardsList.set(resp);
+    }
+    if (resp) {
+      if (resp.length === 1 && title === 'Foods') {
+        uniqueItem.set(resp[0]);
+        const id = resp[0].idMeal;
+        history.push(`/foods/${id}`);
+      }
+      if (resp.length === 1 && title === 'Drinks') {
+        uniqueItem.set(resp[0]);
+        const id = resp[0].idDrink;
+        history.push(`/drinks/${id}`);
+      }
+    }
   }
   return (
-    <div>
+    <div className="searchbar-container">
       <label htmlFor="busca">
         <input
           type="text"
@@ -85,3 +102,7 @@ export default SearchBar;
 SearchBar.propTypes = {
   title: PropTypes.string.isRequired,
 };
+
+// SearchBar.defaultProps = {
+//   title: '',
+// };

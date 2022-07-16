@@ -16,6 +16,7 @@ function Header({ title, perfil, pesquisa }) {
       <header>
         {perfil && (
           <input
+            className="profile-icon"
             src={ profileIcon }
             alt="profile icon"
             type="image"
@@ -35,6 +36,7 @@ function Header({ title, perfil, pesquisa }) {
         {pesquisa && (
           <div>
             <input
+              className="search-icon"
               onClick={ () => setInputState((prev) => !prev) }
               data-testid="search-top-btn"
               src={ searchIcon }

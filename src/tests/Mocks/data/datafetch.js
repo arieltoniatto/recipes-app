@@ -12,7 +12,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "529",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -23,7 +23,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "5",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -34,7 +34,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "529545",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -45,7 +45,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "52936657",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -56,7 +56,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "529654656",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -67,7 +67,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "5264565656",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -78,7 +78,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "1111297411",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -89,7 +89,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "52222222222222977",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -100,7 +100,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "5297333333337",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -111,7 +111,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "52944444444444477",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -122,7 +122,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "52555555555977",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
@@ -133,7 +133,7 @@ const dataMeals= {
             strYoutube: "https://www.youtube.com/watch?v=VVnZd8A84z4",
         },
         {
-            idMeal: "52977",
+            idMeal: "5296666666677",
             strMeal: "Corba",
             strDrinkAlternate: null,
             strCategory: "Side",
