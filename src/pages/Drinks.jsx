@@ -31,7 +31,7 @@ function Drinks() {
       />
       <div className="foods">
         <Recipes
-          list={ (get.length) ? get : undefined }
+          list={ get }
           pag="Drinks"
         />
       </div>

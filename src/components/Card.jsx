@@ -24,7 +24,13 @@ function Card({ img, name, index }) {
 export default Card;
 
 Card.propTypes = {
-  name: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  img: PropTypes.string,
+  index: PropTypes.number,
+};
+
+Card.defaultProps = {
+  name: '',
+  img: '',
+  index: 0,
 };

@@ -3,11 +3,6 @@ const fetchByAllFoods = async (URL, title) => {
   let request = await fetch(URL)
     .then((response) => response.json());
 
-  // console.log(request.meals);
-  // console.log(request.drinks);
-
-  // console.log((Boolean(request.meals) && Boolean(request.drinks)));
-
   if (!request.meals && !request.drinks) {
     global.alert('Sorry, we haven\'t found any recipes for these filters.');
     return null;
