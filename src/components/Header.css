@@ -1,57 +1,40 @@
-@media screen and ( max-width : 360px ) {
-
+@media screen and (max-width : 360px) {
   header {
-    align-items: center;
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(235, 235, 235);
+
     display: flex;
     justify-content: space-around;
-    margin-top: 3.5rem;
-    width: 300px;
-  }
-
-  header .profile-icon {
-    height: 35px;
-    width: 35px;
-  }
-
-  header .search-icon {
-    height: 35px;
-    width: 35px;
-  }
-
-  input {
-    align-content: center;
     align-items: center;
-    display: flex;
-    width: 50%;
+    flex-wrap: wrap;
+
+    position: fixed;
+
+    width: 100vw;
+
   }
+
 }
 
-@media screen and ( min-width : 361px ) {
-
+@media screen and (min-width : 361px) {
   header {
-    align-items: center;
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(235, 235, 235);
+
     display: flex;
-    justify-content: space-around;
-    margin-top: 3.5rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    position: fixed;
+
     width: 480px;
+
+    border-radius: 10px 10px 0 0;
+
+  
+
   }
 
-  header .profile-icon {
-    height: 35px;
-    width: 35px;
-  }
-
-  header .search-icon {
-    height: 35px;
-    width: 35px;
-  }
-
-  input {
-    align-content: center;
-    align-items: center;
-    display: flex;
-    width: 50%;
+  ::-webkit-scrollbar {
+    width: 0;
   }
 }

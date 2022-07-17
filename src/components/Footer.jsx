@@ -2,12 +2,13 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import mealIcon from '../images/mealIcon.svg';
 import drinkIcon from '../images/drinkIcon.svg';
+import './Footer.css';
 
 function Footer() {
   const history = useHistory();
 
   return (
-    <div data-testid="footer">
+    <footer data-testid="footer">
       <input
         className="profile-icon"
         src={ mealIcon }
@@ -26,7 +27,7 @@ function Footer() {
         onClick={ () => history.push('/drinks') }
         id="pro"
       />
-    </div>
+    </footer>
   );
 }
 

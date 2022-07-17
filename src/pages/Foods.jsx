@@ -30,12 +30,10 @@ function Foods() {
         pesquisa
       />
 
-      <div className="foods">
-        <Recipes
-          list={ get }
-          pag="Foods"
-        />
-      </div>
+      <Recipes
+        list={ get }
+        pag="Foods"
+      />
       <Footer />
     </>
   );

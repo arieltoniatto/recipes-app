@@ -12,41 +12,39 @@ function Header({ title, perfil, pesquisa }) {
   const history = useHistory();
 
   return (
-    <div className="header">
-      <header>
-        {perfil && (
+    <header>
+      {perfil && (
+        <input
+          className="profile-icon"
+          src={ profileIcon }
+          alt="profile icon"
+          type="image"
+          data-testid="profile-top-btn"
+          onClick={ () => history.push('/profile') }
+          id="pro"
+        />
+      )}
+      <h1
+        data-testid="page-title"
+      >
+        {title}
+      </h1>
+      {pesquisa && (
+        <div>
           <input
-            className="profile-icon"
-            src={ profileIcon }
-            alt="profile icon"
+            className="search-icon"
+            onClick={ () => setInputState((prev) => !prev) }
+            data-testid="search-top-btn"
+            src={ searchIcon }
+            alt="search icon"
             type="image"
-            data-testid="profile-top-btn"
-            onClick={ () => history.push('/profile') }
-            id="pro"
           />
-        )}
-        <h1
-          data-testid="page-title"
-        >
-          {title}
-        </h1>
-        {pesquisa && (
-          <div>
-            <input
-              className="search-icon"
-              onClick={ () => setInputState((prev) => !prev) }
-              data-testid="search-top-btn"
-              src={ searchIcon }
-              alt="search icon"
-              type="image"
-            />
-          </div>
-        )}
-        {inputState && (
-          <SearchBar title={ title } />
-        )}
-      </header>
-    </div>
+        </div>
+      )}
+      {inputState && (
+        <SearchBar title={ title } />
+      )}
+    </header>
   );
 }
 

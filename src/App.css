@@ -1,108 +1,44 @@
-@media screen and ( max-width : 360px ) {
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  .app-container {
-    align-items: center;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-  }
-
-  .blank-bg {
-    background-color: rgba(255, 255, 255, 0.5);
-    height: 100vh;
-    position: absolute;
-    width: 100vw;
-  }
-
-  .bg-image {
-    background-image: url('./images/bg-image.webp');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    position: absolute;
-    width: 100vw;
-
-  }
-
+@media screen and (max-width : 360px) {
   .principal-app {
-    align-items: center;
-    background-color: rgb(214, 214, 214);
-    border-radius: 10px;
-    box-shadow: 15px 15px 30px black;
-    display: flex;
-    flex-direction: column;
-    height: 620px;
-    justify-content: center;
-    overflow: scroll;
-    overflow-x: hidden;
-    position: absolute;
-    width: 300px;
+    background-color: rgb(215, 215, 215);
   }
 
-  ::-webkit-scrollbar {
-    width: 7px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
 }
 
-@media only screen and ( min-width : 361px ) {
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  .app-container {
-    align-items: center;
-    display: flex;
+@media screen and (min-width : 361px) {
+  .bg-image {
+    background-image: url("./images/bg-image.webp");
     height: 100vh;
-    justify-content: center;
+    width: 100vw;
+    background-size: cover;
+    position: absolute;
   }
 
   .blank-bg {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.527);
     height: 100vh;
-    position: absolute;
     width: 100vw;
+    background-size: cover;
+    position: absolute;
+
   }
 
-  .bg-image {
-    background-image: url('./images/bg-image.webp');
-    background-repeat: no-repeat;
-    background-size: cover;
+  .app-container {
     height: 100vh;
-    position: absolute;
     width: 100vw;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .principal-app {
-    align-items: center;
-    background-color: rgb(214, 214, 214);
-    border-radius: 10px;
-    box-shadow: 15px 15px 30px black;
-    display: flex;
-    flex-direction: column;
-    height: 95vh;
-    justify-content: center;
-    overflow: scroll;
-    overflow-x: hidden;
-    position: absolute;
+    background-color: rgb(215, 215, 215);
+    height: 90vh;
     width: 480px;
+    overflow: scroll;
+    border-radius: 10px;
+
+    box-shadow: 15px 10px 30px black;
+    position: absolute;
   }
 }

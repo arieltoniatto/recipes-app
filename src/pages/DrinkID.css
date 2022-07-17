@@ -1,11 +1,24 @@
-.drinkid-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
+@media screen and (max-width : 360px) {
+  .drinkid-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
 
-img {
-  display: flex;
-  height: 20%;
-  width: 20%;
+  .drinkid-container h1 {
+    text-align: center;
+  }
+
+  .drinkid-container img {
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+  }
+
+  .drinkid-container p {
+    text-align: center;
+  }
 }

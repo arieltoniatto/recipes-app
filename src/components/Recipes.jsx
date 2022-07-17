@@ -16,27 +16,33 @@ function Recipes({ pag, list }) {
   }, [pag]);
 
   return (
-    <div>
-      {categoryList.map((category) => (
-        <button
-          key={ category.strCategory }
-          type="button"
-          value={ category.strCategory }
-        >
-          {category.strCategory}
-        </button>
-      ))}
-      {(list.length) && list
-        .map((item, index) => (
-          <Card
-            key={ index }
-            img={ item.strMealThumb ? item.strMealThumb : item.strDrinkThumb }
-            name={ item.strMeal ? item.strMeal : item.strDrink }
-            index={ index }
-          />
+    <>
+      <div className="fast-search-container">
+        {categoryList.map((category) => (
+          <button
+            className="fast-search-btn btn"
+            key={ category.strCategory }
+            type="button"
+            value={ category.strCategory }
+          >
+            {category.strCategory}
+          </button>
         ))}
-      <hr />
-    </div>
+      </div>
+
+      <div className="recipes-main-content">
+        {(list.length) && list
+          .map((item, index) => (
+            <Card
+              key={ index }
+              img={ item.strMealThumb ? item.strMealThumb : item.strDrinkThumb }
+              name={ item.strMeal ? item.strMeal : item.strDrink }
+              index={ index }
+            />
+          ))}
+        <hr />
+      </div>
+    </>
   );
 }
 

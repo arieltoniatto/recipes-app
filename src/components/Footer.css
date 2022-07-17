@@ -1,0 +1,33 @@
+@media screen and (max-width : 360px) {
+  footer {
+    position: fixed;
+    bottom: 0;
+    background-color: rgb(235, 235, 235);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  footer input {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (min-width : 361px) {
+  footer {
+    position: fixed;
+    bottom: 40px;
+    background-color: rgb(235, 235, 235);
+    width: 480px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 0 0 10px 10px;
+  }
+
+  footer input {
+    width: 30px;
+    height: 30px;
+  }
+
+}

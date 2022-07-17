@@ -40,7 +40,7 @@ function SearchBar({ title }) {
   }
   return (
     <div className="searchbar-container">
-      <label htmlFor="busca">
+      <label className="searchbar-label" htmlFor="busca">
         <input
           type="text"
           id="busca"
@@ -48,10 +48,18 @@ function SearchBar({ title }) {
           data-testid="search-input"
           onChange={ ({ target: { value } }) => setInputText(value) }
         />
+        <button
+          className="btn btn-search"
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ onClickFilter }
+          disabled={ btnDisabled }
+        >
+          Search
+        </button>
       </label>
-      <div>
+      <div className="btn-radios">
         <label htmlFor="ingredient">
-          Ingredient:
           <input
             defaultChecked="checked"
             type="radio"
@@ -61,9 +69,9 @@ function SearchBar({ title }) {
             data-testid="ingredient-search-radio"
             onClick={ ({ target: { value } }) => setRadioButton(value) }
           />
+          Ingredient
         </label>
         <label htmlFor="name">
-          Name:
           <input
             type="radio"
             id="name"
@@ -72,9 +80,9 @@ function SearchBar({ title }) {
             data-testid="name-search-radio"
             onClick={ ({ target: { value } }) => setRadioButton(value) }
           />
+          Name
         </label>
         <label htmlFor="first-letter">
-          Primeira Letra:
           <input
             type="radio"
             id="first-letter"
@@ -83,15 +91,8 @@ function SearchBar({ title }) {
             data-testid="first-letter-search-radio"
             onClick={ ({ target: { value } }) => setRadioButton(value) }
           />
+          Primeira Letra
         </label>
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ onClickFilter }
-          disabled={ btnDisabled }
-        >
-          Search
-        </button>
       </div>
     </div>
   );

@@ -1,17 +1,58 @@
-.card-foods img {
-  border-radius: 50px;
-  height: 20vh;
-  margin-top: 10px;
-  padding: 10px;
+@media screen and (max-width : 360px) {
+  .fast-search-container {
+    padding: 60px 5px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+
+  .fast-search-btn {
+    background-color: orangered;
+    margin: 5px;
+    border-radius: 50px;
+    border: 1px solid black;
+  }
+
+  .fast-search-btn:hover {
+    background-color: rgb(209, 56, 0);
+  }
+
+  .recipes-main-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem 0 2.5rem 0;
+
+  }
 
 }
 
-div h4 {
-  margin-top: 10px;
-  text-align: center;
-}
+@media screen and (min-width : 361px) {
+  .fast-search-container {
+    padding: 60px 5px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
-hr {
-  border: 2px solid black;
-  border-radius: 20px;
+  }
+
+  .fast-search-btn {
+    background-color: orangered;
+    margin: 5px;
+    border-radius: 50px;
+    border: 1px solid black;
+  }
+
+  .fast-search-btn:hover {
+    background-color: rgb(209, 56, 0);
+  }
+
+  .recipes-main-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+
+  }
 }

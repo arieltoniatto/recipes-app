@@ -30,42 +30,44 @@ function Login() {
   return (
     <>
       <div className="logo-image" />
-      <div className="card-login">
-        <label htmlFor="email">
-          Email
-          <input
-            className="form-control"
-            placeholder="exemplo@exemplo.com"
-            id="email"
-            type="text"
-            value={ email }
-            onChange={ ({ target: { value } }) => setEmail(value) }
-            data-testid="email-input"
-          />
-        </label>
+      <div className="bg-login">
+        <div className="card-login">
+          <label htmlFor="email">
+            Email
+            <input
+              className="form-control"
+              placeholder="exemplo@exemplo.com"
+              id="email"
+              type="text"
+              value={ email }
+              onChange={ ({ target: { value } }) => setEmail(value) }
+              data-testid="email-input"
+            />
+          </label>
 
-        <label htmlFor="senha">
-          Senha
-          <input
-            className="form-control"
-            placeholder="Senha"
-            id="senha"
-            type="password"
-            value={ senha }
-            onChange={ ({ target: { value } }) => setSenha(value) }
-            data-testid="password-input"
-          />
-        </label>
+          <label htmlFor="senha">
+            Senha
+            <input
+              className="form-control"
+              placeholder="Senha"
+              id="senha"
+              type="password"
+              value={ senha }
+              onChange={ ({ target: { value } }) => setSenha(value) }
+              data-testid="password-input"
+            />
+          </label>
 
-        <button
-          className="btn"
-          type="button"
-          onClick={ onHandleLogin }
-          disabled={ btnDisabled }
-          data-testid="login-submit-btn"
-        >
-          Entrar
-        </button>
+          <button
+            className="btn"
+            type="button"
+            onClick={ onHandleLogin }
+            disabled={ btnDisabled }
+            data-testid="login-submit-btn"
+          >
+            Entrar
+          </button>
+        </div>
       </div>
     </>
   );

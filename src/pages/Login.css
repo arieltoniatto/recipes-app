@@ -1,70 +1,81 @@
-@media screen and ( max-width : 360px ) {
-
+@media screen and (max-width : 360px) {
   .logo-image {
-    background-image: url('../images/food-logo.png');
-    background-repeat: no-repeat;
+    height: 360px;
+    background-image: url("../images/food-logo.png");
+    background-position: auto;
     background-size: cover;
-    height: 359px;
-    margin-top: -3rem;
-    width: 359px;
+  }
+
+  .bg-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
   }
 
   .card-login {
-    align-items: center;
-    background-color: rgb(145, 145, 145);
+    background-color: rgb(150, 150, 150);
+    padding: 1rem;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
-    padding: 1rem 0;
-    width: 95%;
+    align-items: center;
   }
 
-  .btn {
+  .card-login button {
+    border-radius: 25px;
+    border: 2px solid black;
     background-color: orangered;
-    border-radius: 30px;
-    width: 80%;
+    width: 175px;
   }
 
-  .btn:hover {
-    background-color: rgb(226, 60, 0);
+  .card-login label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+
 }
 
-@media screen and ( min-width : 361px ) {
-
+@media screen and (min-width : 361px) {
   .logo-image {
-    background-image: url('../images/food-logo.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 480px;
-    margin-top: -10rem;
+    height: 51vh;
     width: 480px;
+    background-image: url("../images/food-logo.png");
+    background-position: auto;
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+  }
+
+  .bg-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
   }
 
   .card-login {
-    align-items: center;
-    background-color: rgb(145, 145, 145);
+    background-color: rgb(150, 150, 150);
+    padding: 1rem;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    margin-top: 5rem;
-    padding: 4rem 0;
-    width: 95%;
+    align-items: center;
   }
 
-  .btn {
+  .card-login button {
+    border-radius: 25px;
+    border: 2px solid black;
     background-color: orangered;
-    border-radius: 30px;
-    width: 80%;
+    width: 175px;
   }
 
-  .btn:hover {
-    background-color: rgb(226, 60, 0);
+  .card-login label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-}
-
-::-webkit-scrollbar {
-  width: 0;
 }
