@@ -2,7 +2,7 @@ const meals = {
   meals: [
     {
       idMeal: '52977',
-      'strMeal': 'Corba',
+      strMeal: 'Corba',
       strDrinkAlternate: null,
       strCategory: 'Side',
       strArea: 'Turkish',

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useCallback } from 'react';
-import Header from '../components/Header';
 import appContext from '../context/appContext';
 import Recipes from '../components/Recipes';
 import fetchByAllFoods from '../services/fetchRequest';
@@ -23,11 +22,6 @@ function Drinks() {
 
   return (
     <>
-      <Header
-        title="Drinks"
-        perfil
-        pesquisa
-      />
       <div className="foods">
         <Recipes
           list={ get }

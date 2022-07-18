@@ -1,10 +1,13 @@
 @media screen and ( max-width : 360px ) {
 
   .fast-search-container {
+    background-color: rgb(215, 215, 215);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 60px 5px 0;
+    padding: 10px 5px 0;
+    position: fixed;
+    top: 50px;
 
   }
 
@@ -21,10 +24,33 @@
 
   .recipes-main-content {
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: wrap;
     justify-content: center;
-    padding: 1rem 0 2.5rem;
+    padding: 10rem 0 2.5rem;
 
+  }
+
+  .recipes-main-content a {
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .recipes-main-content a:hover {
+    background-color: rgb(155, 154, 154);
+    border-radius: 10px;
+  }
+
+  .container li .scrached {
+    text-decoration: line-through black;
   }
 
 }
