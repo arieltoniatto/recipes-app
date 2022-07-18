@@ -14,7 +14,7 @@ function Footer() {
         src={ mealIcon }
         alt="profile icon"
         type="image"
-        testid="food-bottom-btn"
+        data-testid="food-bottom-btn"
         onClick={ () => history.push('/foods') }
         id="pro"
       />
@@ -23,7 +23,7 @@ function Footer() {
         src={ drinkIcon }
         alt="profile icon"
         type="image"
-        testid="drinks-bottom-btn"
+        data-testid="drinks-bottom-btn"
         onClick={ () => history.push('/drinks') }
         id="pro"
       />
