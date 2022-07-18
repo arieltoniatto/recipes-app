@@ -1,14 +1,15 @@
-@media screen and (max-width : 360px) {
+@media screen and ( max-width : 360px ) {
+
   .searchbar-container {
     display: flex;
+    flex-flow: wrap;
     flex-direction: column;
-    flex-wrap: wrap;
   }
 
   .btn-search {
-    border-radius: 50px;
     background-color: orangered;
     border: 1px solid black;
+    border-radius: 50px;
   }
 
   .btn-radios {
@@ -22,25 +23,26 @@
 
 }
 
-@media screen and (min-width : 361px) {
+@media screen and ( min-width : 361px ) {
+
   .searchbar-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
     align-items: center;
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: column;
   }
-  
+
   .searchbar-label {
-    width: 480px;
     display: flex;
     justify-content: center;
+    width: 480px;
 
   }
 
   .btn-search {
-    border-radius: 50px;
     background-color: orangered;
     border: 1px solid black;
+    border-radius: 50px;
   }
 
   .btn-radios {

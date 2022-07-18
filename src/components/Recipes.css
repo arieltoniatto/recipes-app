@@ -1,17 +1,18 @@
-@media screen and (max-width : 360px) {
+@media screen and ( max-width : 360px ) {
+
   .fast-search-container {
-    padding: 60px 5px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 60px 5px 0;
 
   }
 
   .fast-search-btn {
     background-color: orangered;
-    margin: 5px;
-    border-radius: 50px;
     border: 1px solid black;
+    border-radius: 50px;
+    margin: 5px;
   }
 
   .fast-search-btn:hover {
@@ -20,28 +21,29 @@
 
   .recipes-main-content {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    padding: 1rem 0 2.5rem 0;
+    justify-content: center;
+    padding: 1rem 0 2.5rem;
 
   }
 
 }
 
-@media screen and (min-width : 361px) {
+@media screen and ( min-width : 361px ) {
+
   .fast-search-container {
-    padding: 60px 5px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 60px 5px 0;
 
   }
 
   .fast-search-btn {
     background-color: orangered;
-    margin: 5px;
-    border-radius: 50px;
     border: 1px solid black;
+    border-radius: 50px;
+    margin: 5px;
   }
 
   .fast-search-btn:hover {
@@ -50,8 +52,8 @@
 
   .recipes-main-content {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
     padding: 1rem;
 
   }

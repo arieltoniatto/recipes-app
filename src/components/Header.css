@@ -1,37 +1,28 @@
-@media screen and (max-width : 360px) {
+@media screen and ( max-width : 360px ) {
+
   header {
-    background-color: rgb(235, 235, 235);
-
-    display: flex;
-    justify-content: space-around;
     align-items: center;
+    background-color: rgb(235, 235, 235);
+    display: flex;
     flex-wrap: wrap;
-
+    justify-content: space-around;
     position: fixed;
-
     width: 100vw;
-
   }
 
 }
 
-@media screen and (min-width : 361px) {
+@media screen and ( min-width : 361px ) {
+
   header {
-    background-color: rgb(235, 235, 235);
-
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-
-    position: fixed;
-
-    width: 480px;
-
+    background-color: rgb(235, 235, 235);
     border-radius: 10px 10px 0 0;
-
-  
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: fixed;
+    width: 480px;
   }
 
   ::-webkit-scrollbar {

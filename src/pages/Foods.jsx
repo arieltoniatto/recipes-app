@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useCallback } from 'react';
 import appContext from '../context/appContext';
 import Header from '../components/Header';
 import Recipes from '../components/Recipes';
-import './Foods.css';
 import fetchByAllFoods from '../services/fetchRequest';
 import Footer from '../components/Footer';
 

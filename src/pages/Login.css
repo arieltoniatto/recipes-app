@@ -1,81 +1,82 @@
-@media screen and (max-width : 360px) {
+@media screen and ( max-width : 360px ) {
+
   .logo-image {
-    height: 360px;
-    background-image: url("../images/food-logo.png");
+    background-image: url('../images/food-logo.png');
     background-position: auto;
     background-size: cover;
+    height: 360px;
   }
 
   .bg-login {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 280px;
+    justify-content: center;
   }
 
   .card-login {
+    align-items: center;
     background-color: rgb(150, 150, 150);
-    padding: 1rem;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 1rem;
   }
 
   .card-login button {
-    border-radius: 25px;
-    border: 2px solid black;
     background-color: orangered;
+    border: 2px solid black;
+    border-radius: 25px;
     width: 175px;
   }
 
   .card-login label {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 
 }
 
-@media screen and (min-width : 361px) {
+@media screen and ( min-width : 361px ) {
+
   .logo-image {
-    height: 51vh;
-    width: 480px;
-    background-image: url("../images/food-logo.png");
+    background-image: url('../images/food-logo.png');
     background-position: auto;
     background-size: cover;
-    /* background-repeat: no-repeat; */
+    height: 51vh;
+    width: 480px;
   }
 
   .bg-login {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 280px;
+    justify-content: center;
   }
 
   .card-login {
+    align-items: center;
     background-color: rgb(150, 150, 150);
-    padding: 1rem;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 1rem;
   }
 
   .card-login button {
-    border-radius: 25px;
-    border: 2px solid black;
     background-color: orangered;
+    border: 2px solid black;
+    border-radius: 25px;
     width: 175px;
   }
 
   .card-login label {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 
 }

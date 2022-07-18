@@ -3,7 +3,6 @@ import Header from '../components/Header';
 import appContext from '../context/appContext';
 import Recipes from '../components/Recipes';
 import fetchByAllFoods from '../services/fetchRequest';
-import './Foods.css';
 import Footer from '../components/Footer';
 
 const URL_FIST_REQUEST = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';

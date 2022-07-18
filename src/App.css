@@ -1,44 +1,45 @@
-@media screen and (max-width : 360px) {
+@media screen and ( max-width : 360px ) {
+
   .principal-app {
     background-color: rgb(215, 215, 215);
   }
 
 }
 
-@media screen and (min-width : 361px) {
+@media screen and ( min-width : 361px ) {
+
   .bg-image {
-    background-image: url("./images/bg-image.webp");
-    height: 100vh;
-    width: 100vw;
+    background-image: url('./images/bg-image.webp');
     background-size: cover;
+    height: 100vh;
     position: absolute;
+    width: 100vw;
   }
 
   .blank-bg {
     background-color: rgba(255, 255, 255, 0.527);
-    height: 100vh;
-    width: 100vw;
     background-size: cover;
+    height: 100vh;
     position: absolute;
+    width: 100vw;
 
   }
 
   .app-container {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100vw;
   }
 
   .principal-app {
     background-color: rgb(215, 215, 215);
-    height: 90vh;
-    width: 480px;
-    overflow: scroll;
     border-radius: 10px;
-
     box-shadow: 15px 10px 30px black;
+    height: 90vh;
+    overflow: scroll;
     position: absolute;
+    width: 480px;
   }
 }
