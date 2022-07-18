@@ -1,31 +1,35 @@
 @media screen and ( max-width : 360px ) {
 
-  header {
-    align-items: center;
+  footer {
     background-color: rgb(235, 235, 235);
+    bottom: 0;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
     position: fixed;
-    width: 100vw;
+    width: 100%;
   }
 
+  footer input {
+    height: 30px;
+    width: 30px;
+  }
 }
 
 @media screen and ( min-width : 361px ) {
 
-  header {
-    align-items: center;
+  footer {
     background-color: rgb(235, 235, 235);
-    border-radius: 10px 10px 0 0;
+    border-radius: 0 0 10px 10px;
+    bottom: 40px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     position: fixed;
     width: 480px;
   }
 
-  ::-webkit-scrollbar {
-    width: 0;
+  footer input {
+    height: 30px;
+    width: 30px;
   }
+
 }

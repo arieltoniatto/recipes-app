@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useCallback } from 'react';
 import appContext from '../context/appContext';
 import Header from '../components/Header';
-import CardFoods from '../components/CardFoods';
-import './Foods.css';
+import Recipes from '../components/Recipes';
 import fetchByAllFoods from '../services/fetchRequest';
+import Footer from '../components/Footer';
 
 const URL_FIST_REQUEST = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 function Foods() {
@@ -29,16 +29,11 @@ function Foods() {
         pesquisa
       />
 
-      <div className="foods">
-        {get.map((food, index) => (
-          <CardFoods
-            index={ index }
-            key={ food.idMeal }
-            img={ food.strMealThumb }
-            name={ food.strMeal }
-          />
-        ))}
-      </div>
+      <Recipes
+        list={ get }
+        pag="Foods"
+      />
+      <Footer />
     </>
   );
 }

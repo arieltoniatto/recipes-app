@@ -1,6 +1,0 @@
-.foods {
-  display: flex;
-  flex-wrap: wrap;
-  height: 100%;
-  justify-content: space-around;
-}

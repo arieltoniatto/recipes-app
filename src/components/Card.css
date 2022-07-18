@@ -1,0 +1,36 @@
+@media screen and ( max-width : 360px ) {
+
+  .card-foods img {
+    border-radius: 25px;
+    box-shadow: 5px 2px 10px black;
+    height: 100px;
+    margin: 15px;
+    width: 130px;
+
+  }
+
+  .card-foods h4 {
+    text-align: center;
+  }
+
+}
+
+@media screen and ( min-width : 361px ) {
+
+  .card-foods {
+    margin: 10px;
+  }
+
+  .card-foods img {
+    border-radius: 25px;
+    box-shadow: 5px 2px 10px black;
+    height: 100px;
+    margin: 15px;
+    width: 130px;
+  }
+
+  .card-foods h4 {
+    text-align: center;
+
+  }
+}

@@ -2,69 +2,81 @@
 
   .logo-image {
     background-image: url('../images/food-logo.png');
-    background-repeat: no-repeat;
+    background-position: auto;
     background-size: cover;
-    height: 359px;
-    margin-top: -3rem;
-    width: 359px;
+    height: 360px;
+  }
+
+  .bg-login {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 280px;
+    justify-content: center;
   }
 
   .card-login {
     align-items: center;
-    background-color: rgb(145, 145, 145);
+    background-color: rgb(150, 150, 150);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
-    padding: 1rem 0;
-    width: 95%;
+    padding: 1rem;
   }
 
-  .btn {
+  .card-login button {
     background-color: orangered;
-    border-radius: 30px;
-    width: 80%;
+    border: 2px solid black;
+    border-radius: 25px;
+    width: 175px;
   }
 
-  .btn:hover {
-    background-color: rgb(226, 60, 0);
+  .card-login label {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
+
 }
 
 @media screen and ( min-width : 361px ) {
 
   .logo-image {
     background-image: url('../images/food-logo.png');
-    background-repeat: no-repeat;
+    background-position: auto;
     background-size: cover;
-    height: 480px;
-    margin-top: -10rem;
+    height: 51vh;
     width: 480px;
+  }
+
+  .bg-login {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 280px;
+    justify-content: center;
   }
 
   .card-login {
     align-items: center;
-    background-color: rgb(145, 145, 145);
+    background-color: rgb(150, 150, 150);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    margin-top: 5rem;
-    padding: 4rem 0;
-    width: 95%;
+    padding: 1rem;
   }
 
-  .btn {
+  .card-login button {
     background-color: orangered;
-    border-radius: 30px;
-    width: 80%;
+    border: 2px solid black;
+    border-radius: 25px;
+    width: 175px;
   }
 
-  .btn:hover {
-    background-color: rgb(226, 60, 0);
+  .card-login label {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
 
-}
-
-::-webkit-scrollbar {
-  width: 0;
 }
