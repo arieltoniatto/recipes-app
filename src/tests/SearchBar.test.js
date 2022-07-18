@@ -60,7 +60,7 @@ describe('testing search bar', () => {
     const btnEl = screen.getByTestId('exec-search-btn')
     const textInputEl = screen.getByTestId('search-input')
     const ingredientEl = screen.getByRole('radio', {
-      name: /ingredient:/i
+      name: /ingredient/i
     })
     const firstLetterRadioEl = screen.getByTestId('first-letter-search-radio')
 

@@ -9,7 +9,11 @@
 @media screen and ( min-width : 361px ) {
 
   .bg-image {
+<<<<<<< HEAD
     background-image: url('./images/bg-image.webp');
+=======
+    background-image: url("./images/bg-image.webp");
+>>>>>>> 507affac1ca174477c9adc32ceac47b55349600b
     background-size: cover;
     height: 100vh;
     position: absolute;

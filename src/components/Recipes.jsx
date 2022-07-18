@@ -31,7 +31,7 @@ function Recipes({ pag, list }) {
       </div>
 
       <div className="recipes-main-content">
-        {(list.length) && list
+        {Boolean(list.length) && list
           .map((item, index) => (
             <Card
               key={ index }

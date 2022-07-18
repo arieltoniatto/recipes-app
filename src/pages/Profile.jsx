@@ -20,7 +20,8 @@ function Profile() {
       />
       <h1>Profile page</h1>
       <h3 data-testid="profile-email">
-        {JSON.parse(localStorage.getItem('user')).email}
+        {JSON.parse(localStorage.getItem('user')) && (
+          JSON.parse(localStorage.getItem('user')).email)}
       </h3>
       <button
         type="button"
