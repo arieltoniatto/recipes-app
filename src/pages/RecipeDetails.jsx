@@ -30,8 +30,6 @@ function RecipeDetails() {
         }
       }
       detailsItem.listIngred = listIngred;
-      console.log(detailsItem.listIngred);
-      // setDetailsItem({ ...detailsItem });
       setIngredient(listIngred);
     }
   }, [detailsItem]);
