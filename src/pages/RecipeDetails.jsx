@@ -4,6 +4,7 @@ import requestById from '../services/fetchById';
 import './RecipeDetails.css';
 import fetchRecommendation from '../services/fetchRecommendation';
 import useContextApp from '../hooks/useContextApp';
+import generateIngredient from '../services/generateIngredient';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -11,28 +12,16 @@ function RecipeDetails() {
   const [recommendations, setRecommendations] = useState([]);
   const [ingredient, setIngredient] = useState([]);
   const [done, setDone] = useState(false);
+  const [continueRecip, setContinueRecip] = useState(false);
   const history = useHistory();
 
-  const { doneRecipes, detailsItem } = useContextApp();
+  const { doneRecipes, detailsItem, inProgressRecipes } = useContextApp();
 
   const catchIngedients = useCallback(() => {
     if (detailsItem.get) {
-      let listIngred = [];
-      const MAX_QTD = 20;
-      for (let i = 1; i <= MAX_QTD; i += 1) {
-        const strIngredient = `strIngredient${i}`;
-        const strMeasure = `strMeasure${i}`;
-        if (detailsItem.get[strIngredient]) {
-          listIngred = [
-            ...listIngred,
-            { strIngredient: detailsItem.get[strIngredient],
-              strMeasure: detailsItem.get[strMeasure],
-              checked: false }];
-        }
-      }
-      detailsItem.get.listIngred = listIngred;
-      console.log(detailsItem.get);
-      setIngredient(listIngred);
+      const newList = generateIngredient(detailsItem.get);
+      detailsItem.get.listIngred = newList;
+      setIngredient(newList);
     }
   }, [detailsItem.get]);
 
@@ -47,6 +36,13 @@ function RecipeDetails() {
   }, [catchIngedients, doneRecipes.get, id]);
 
   useEffect(() => {
+    const initialVerication = () => {
+      const pagName = pathname.includes('foods') ? 'meals' : 'cocktails';
+      if (inProgressRecipes.get[pagName][id]) {
+        setContinueRecip(true);
+      }
+    };
+    initialVerication();
     const requestItem = async () => {
       const request = await requestById(pathname, id);
       detailsItem.set(request[0]);
@@ -96,7 +92,7 @@ function RecipeDetails() {
               </li>
             ))}
           </ul>
-          <p data-testid="instructions">{detailsItem.strInstructions}</p>
+          <p data-testid="instructions">{detailsItem.get.strInstructions}</p>
 
           {pathname.includes('/foods') && (<iframe
             data-testid="video"
@@ -136,7 +132,7 @@ function RecipeDetails() {
           type="button"
           onClick={ startRecipe }
         >
-          Start Recipe
+          {continueRecip ? 'Continue Recipe' : 'Start Recipe'}
         </button>
       )}
     </div>
