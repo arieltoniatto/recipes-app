@@ -50,7 +50,6 @@ function RecipeDetails() {
     const requestRecommendation = async () => {
       const request = await fetchRecommendation(pathname);
       setRecommendations(request);
-      console.log(request);
     };
     requestRecommendation();
     requestItem();

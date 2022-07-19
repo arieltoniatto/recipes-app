@@ -8,8 +8,6 @@ async function fetchRecommendation(pag) {
   }
 
   const request = await fetch(URL).then((response) => response.json());
-  console.log('type req', TYPE_REQUEST);
-  console.log(request);
   return request[TYPE_REQUEST].slice(0, MAX_LENGTH_LIST);
 }
 
