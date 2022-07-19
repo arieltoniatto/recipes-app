@@ -1,47 +1,55 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useHistory } from 'react-router-dom';
 import requestById from '../services/fetchById';
 import './RecipeDetails.css';
 import fetchRecommendation from '../services/fetchRecommendation';
+import useContextApp from '../hooks/useContextApp';
 
 function RecipeDetails() {
   const { id } = useParams();
   const { pathname } = useLocation();
-  const [detailsItem, setDetailsItem] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
-  const [btnStart, setBtnStart] = useState(false);
   const [ingredient, setIngredient] = useState([]);
+  const [done, setDone] = useState(false);
+  const history = useHistory();
 
-  const youTubeLink = () => detailsItem.strYoutube.replace('watch?v=', '/embed/');
+  const { doneRecipes, detailsItem } = useContextApp();
 
   const catchIngedients = useCallback(() => {
-    if (detailsItem) {
+    if (detailsItem.get) {
       let listIngred = [];
       const MAX_QTD = 20;
       for (let i = 1; i <= MAX_QTD; i += 1) {
         const strIngredient = `strIngredient${i}`;
         const strMeasure = `strMeasure${i}`;
-        if (detailsItem[strIngredient]) {
+        if (detailsItem.get[strIngredient]) {
           listIngred = [
             ...listIngred,
-            { strIngredient: detailsItem[strIngredient],
-              strMeasure: detailsItem[strMeasure],
+            { strIngredient: detailsItem.get[strIngredient],
+              strMeasure: detailsItem.get[strMeasure],
               checked: false }];
         }
       }
-      detailsItem.listIngred = listIngred;
+      detailsItem.get.listIngred = listIngred;
+      console.log(detailsItem.get);
       setIngredient(listIngred);
     }
-  }, [detailsItem]);
+  }, [detailsItem.get]);
 
   useEffect(() => {
+    const verificaReceita = () => {
+      if (doneRecipes.get.some((item) => item.id === id)) {
+        setDone(true);
+      }
+    };
+    verificaReceita();
     catchIngedients();
-  }, [catchIngedients]);
+  }, [catchIngedients, doneRecipes.get, id]);
 
   useEffect(() => {
     const requestItem = async () => {
       const request = await requestById(pathname, id);
-      setDetailsItem(request[0]);
+      detailsItem.set(request[0]);
     };
     const requestRecommendation = async () => {
       const request = await fetchRecommendation(pathname);
@@ -51,69 +59,43 @@ function RecipeDetails() {
     requestItem();
   }, [id, pathname]);
 
-  function onHandleStart() {
-    setBtnStart((prev) => !prev);
+  function startRecipe() {
+    if (pathname.includes('/foods')) return history.push(`/foods/${id}/in-progress`);
+    return history.push(`/drinks/${id}/in-progress`);
   }
 
-  function onHandleCheck(index) {
-    const newList = [...ingredient];
-    newList[index].checked = !newList[index].checked;
-    setIngredient(newList);
-  }
+  const youTubeLink = () => detailsItem.get.strYoutube.replace('watch?v=', '/embed/');
 
   return (
     <div className="main-container">
-      {detailsItem && (
+      {detailsItem.get && (
         <div className="container">
           <img
             data-testid="recipe-photo"
             src={
-              detailsItem.strMealThumb
-                ? detailsItem.strMealThumb : detailsItem.strDrinkThumb
+              detailsItem.get.strMealThumb
+                ? detailsItem.get.strMealThumb : detailsItem.get.strDrinkThumb
             }
-            alt={ detailsItem.strMeal ? detailsItem.strMeal : detailsItem.strDrink }
+            alt={ detailsItem.get.strMea
+              ? detailsItem.get.strMeal : detailsItem.get.strDrink }
           />
           <h1 data-testid="recipe-title">
-            { detailsItem.strMeal ? detailsItem.strMeal : detailsItem.strDrink }
+            { detailsItem.get.strMeal
+              ? detailsItem.get.strMeal : detailsItem.get.strDrink }
           </h1>
-          <p data-testid="recipe-category">{detailsItem.strCategory}</p>
+          <p data-testid="recipe-category">{detailsItem.get.strCategory}</p>
           {pathname.includes('/drinks') && (
-            <p data-testid="recipe-category">{detailsItem.strAlcoholic}</p>)}
-          {btnStart ? (
-            <ul>
-              {ingredient.map((item, index) => (
-                <li
-                  key={ index }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {`${item.strIngredient} - ${item.strMeasure}`}
-                </li>
-              ))}
-            </ul>)
-            : (
-              <ul>
-                {ingredient.map((item, index) => (
-                  <li
-                    key={ index }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    <label
-                      className={ item.checked ? 'scrached' : 'default' }
-                      htmlFor={ `ingredients${index}` }
-                    >
-                      <input
-                        type="checkbox"
-                        id={ `ingredients${index}` }
-                        checked={ item.checked }
-                        onChange={ () => onHandleCheck(index) }
-                      />
-                      {`${item.strIngredient} - ${item.strMeasure}`}
-                    </label>
-                  </li>
-
-                ))}
-              </ul>
-            )}
+            <p data-testid="recipe-category">{detailsItem.get.strAlcoholic}</p>)}
+          <ul>
+            {ingredient.map((item, index) => (
+              <li
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {`${item.strIngredient} - ${item.strMeasure}`}
+              </li>
+            ))}
+          </ul>
           <p data-testid="instructions">{detailsItem.strInstructions}</p>
 
           {pathname.includes('/foods') && (<iframe
@@ -147,14 +129,16 @@ function RecipeDetails() {
           </div>
         </div>
       )}
-      <button
-        className="start-recipe-btn"
-        data-testid="start-recipe-btn"
-        type="button"
-        onClick={ onHandleStart }
-      >
-        Start Recipe
-      </button>
+      {!done && (
+        <button
+          className="start-recipe-btn"
+          data-testid="start-recipe-btn"
+          type="button"
+          onClick={ startRecipe }
+        >
+          Start Recipe
+        </button>
+      )}
     </div>
   );
 }

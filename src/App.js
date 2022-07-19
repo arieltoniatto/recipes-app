@@ -21,7 +21,8 @@ function App() {
         <div className="principal-app">
           <Switch>
             <Route exact path="/" component={ Login } />
-            <Route path="/recipeinprogress" component={ RecipeInProgress } />
+            <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />
+            <Route path="/drinks/:id/in-progress" component={ RecipeInProgress } />
             <Route path="/foods/:id" component={ RecipeDetails } />
             <Route path="/drinks/:id" component={ RecipeDetails } />
             <Route path="/foods" component={ Foods } />

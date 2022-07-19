@@ -15,6 +15,7 @@ const INITIAL_STATE_IN_PROGRESS_R = {
 function AppProvider({ children }) {
   const [user, setUser] = useState(INITIAL_STATE_USER);
   const [cardsList, setCardList] = useState([]);
+  const [detailsItem, setDetailsItem] = useState(null);
   const [uniqueItem, setUniqueItem] = useState({});
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -57,6 +58,10 @@ function AppProvider({ children }) {
     inProgressRecipes: {
       get: inProgressRecipes,
       set: setInProfressRecipes,
+    },
+    detailsItem: {
+      get: detailsItem,
+      set: setDetailsItem,
     },
   };
 
