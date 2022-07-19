@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useCallback } from 'react';
 import appContext from '../context/appContext';
-import Header from '../components/Header';
 import Recipes from '../components/Recipes';
 import fetchByAllFoods from '../services/fetchRequest';
 import Footer from '../components/Footer';
@@ -23,12 +22,6 @@ function Foods() {
 
   return (
     <>
-      <Header
-        title="Foods"
-        perfil
-        pesquisa
-      />
-
       <Recipes
         list={ get }
         pag="Foods"

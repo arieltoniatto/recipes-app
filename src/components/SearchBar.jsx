@@ -9,7 +9,7 @@ function SearchBar({ title }) {
   const [inputText, setInputText] = useState('');
   const [radioButton, setRadioButton] = useState('ingredient');
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const { cardsList, uniqueItem } = useContext(appContext);
+  const { cardsList } = useContext(appContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -27,12 +27,10 @@ function SearchBar({ title }) {
     }
     if (resp) {
       if (resp.length === 1 && title === 'Foods') {
-        uniqueItem.set(resp[0]);
         const id = resp[0].idMeal;
         history.push(`/foods/${id}`);
       }
       if (resp.length === 1 && title === 'Drinks') {
-        uniqueItem.set(resp[0]);
         const id = resp[0].idDrink;
         history.push(`/drinks/${id}`);
       }

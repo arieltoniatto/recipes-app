@@ -3,28 +3,11 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App'
 import renderWithRouter from './helpers/renderWithRouter';
-import mockFetch from './Mocks/fetchMock';
-// import dataMeals from './Mocks/data/datafetch'
-import { act } from 'react-dom/test-utils'
-// import { meals } from '../../cypress/mocks/meals'
-// import { drinks } from '../../cypress/mocks/drinks'
-import meals from './Mocks/data/meals'
-import drinks from './Mocks/data/drinks'
 
 describe('testing search bar', () => {
-
-    // beforeEach(() => {
-    //     act(() => {
-    //       mockFetch(meals)
-    //     })
-    // })
-    // beforeEach(mockFetch);
-      afterEach(() => jest.clearAllMocks());
   test('verify if the component is working properly', async () => {
-    await act(async () => {
-      renderWithRouter(<App />, ['/foods'])
-    })
-    
+    renderWithRouter(<App />, ['/foods'])
+
     const searchBtnEl = screen.getByRole('button', {
       name: /search icon/i
     })
@@ -43,12 +26,10 @@ describe('testing search bar', () => {
     userEvent.type(textInputEl, 'f')
     userEvent.click(btnEl)
 
-  } )
+  });
   test('verify if a warning appears if more than one character is typed on First Letter Search', async () => {
-    await act(async () => {
-      renderWithRouter(<App />, ['/foods'])
-    })
-
+    renderWithRouter(<App />, ['/foods'])
+ 
     global.alert = jest.fn((msg) => msg);
 
     const searchBtnEl = screen.getByRole('button', {
@@ -71,13 +52,10 @@ describe('testing search bar', () => {
 
     expect(global.alert).toHaveBeenCalledWith('Your search must have only 1 (one) character')  
 
-  } )
+  });
   test('test if finds one element in meals', async () => {
-    mockFetch(meals)
-    await act(async () => {
-      renderWithRouter(<App />, ['/foods'])
-    })
-
+    // mockFetch(meals)
+    const {history} = renderWithRouter(<App />, ['/foods'])
 
     const searchBtnEl = screen.getByRole('button', {
       name: /search icon/i
@@ -94,20 +72,11 @@ describe('testing search bar', () => {
     userEvent.click(btnEl)
 
     await waitFor(() => {
-      const oneEl = screen.findByRole('heading', { name: /corba/i, level: 4 });
-      // expect(oneEl).toBeInTheDocument();
+      expect(history.location.pathname).toBe('/foods/52977')
     }, { timeout: 3000 })
-
-    
-   
-
-  })
+  });
   test('test if find one element in drinks', async () => {
-    mockFetch(drinks)
-    await act(async () => {
-      renderWithRouter(<App />, ['/drinks'])
-    })
-
+    const { history } = renderWithRouter(<App />, ['/drinks'])
 
     const searchBtnEl = screen.getByRole('button', {
       name: /search icon/i
@@ -120,12 +89,11 @@ describe('testing search bar', () => {
     const nameRadioEl = screen.getByTestId('name-search-radio')
 
     userEvent.click(nameRadioEl)
-    userEvent.type(textInputEl, 'GG')
+    userEvent.type(textInputEl, 'dry martini')
     userEvent.click(btnEl)
 
     await waitFor(() => {
-      const oneEl = screen.findByRole('heading', { name: /gg/i, level: 4 });
-      // expect(oneEl).toBeInTheDocument();
+      expect(history.location.pathname).toBe('/drinks/11005')
     }, { timeout: 3000 })
   })
 });
