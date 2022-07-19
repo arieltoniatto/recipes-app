@@ -74,7 +74,7 @@ function RecipeDetails() {
   //       return newObj;
   //     }, {});
   //   return console.log(newObj);
-  // }
+  // }??
 
   return (
     <div className="main-container">
