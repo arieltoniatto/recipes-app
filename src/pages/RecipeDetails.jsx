@@ -16,31 +16,29 @@ function RecipeDetails() {
 
   const catchIngedients = useCallback(() => {
     if (detailsItem) {
-      const measureList = Object.entries(detailsItem)
-        .filter((ingred) => ingred[0].includes('strMeasure'));
-
-      let ingrediente = Object.entries(detailsItem)
-        .filter((ingred) => ingred[0].includes('strIngredient'));
-      if (pathname.includes('/foods')) {
-        ingrediente = ingrediente.filter((f) => f[1] !== '');
-      } else {
-        ingrediente = ingrediente.filter((f) => f[1] !== null);
+      let listIngred = [];
+      const MAX_QTD = 20;
+      for (let i = 1; i <= MAX_QTD; i += 1) {
+        const strIngredient = `strIngredient${i}`;
+        const strMeasure = `strMeasure${i}`;
+        if (detailsItem[strIngredient]) {
+          listIngred = [
+            ...listIngred,
+            { strIngredient: detailsItem[strIngredient],
+              strMeasure: detailsItem[strMeasure],
+              checked: false }];
+        }
       }
-
-      ingrediente = ingrediente.reduce((acc, item, index) => {
-        acc = [...acc, { strIngredient: item[1],
-          strMeasure: measureList[index][1],
-          checked: false }];
-        return acc;
-      }, []);
-
-      setIngredient(ingrediente);
+      detailsItem.listIngred = listIngred;
+      console.log(detailsItem.listIngred);
+      // setDetailsItem({ ...detailsItem });
+      setIngredient(listIngred);
     }
-  }, [detailsItem, pathname]);
+  }, [detailsItem]);
 
   useEffect(() => {
     catchIngedients();
-  }, [catchIngedients, detailsItem]);
+  }, [catchIngedients]);
 
   useEffect(() => {
     const requestItem = async () => {
@@ -64,16 +62,6 @@ function RecipeDetails() {
     newList[index].checked = !newList[index].checked;
     setIngredient(newList);
   }
-
-  // function mapStuff() {
-  //   let newObj = {};
-  //   Object.keys(detailsItem).filter((key) => key.includes('strIngredient'))
-  //     .reduce((acc, key) => {
-  //       newObj = Object.assign(acc, { [key]: detailsItem[key] });
-  //       return newObj;
-  //     }, {});
-  //   return console.log(newObj);
-  // }??
 
   return (
     <div className="main-container">
