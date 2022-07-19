@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FoodInProgress() {
+function RecipeInProgress() {
   return (
     <div>
       <h1>HOME FoodInProgresssss</h1>
