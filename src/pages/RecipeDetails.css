@@ -61,4 +61,14 @@
     width: 340px;
   }
 
+  .main-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .start-recipe-btn {
+    bottom: 2px;
+    position: fixed;
+  }
+
 }

@@ -77,7 +77,7 @@ function RecipeDetails() {
   // }
 
   return (
-    <div>
+    <div className="main-container">
       {detailsItem && (
         <div className="container">
           <img
@@ -114,13 +114,13 @@ function RecipeDetails() {
                   >
                     <label
                       className={ item.checked ? 'scrached' : 'default' }
-                      htmlFor={ `indredients${index}` }
+                      htmlFor={ `ingredients${index}` }
                     >
                       <input
                         type="checkbox"
-                        id={ `indredients${index}` }
+                        id={ `ingredients${index}` }
                         checked={ item.checked }
-                        onClick={ () => onHandleCheck(index) }
+                        onChange={ () => onHandleCheck(index) }
                       />
                       {`${item.strIngredient} - ${item.strMeasure}`}
                     </label>
@@ -163,6 +163,7 @@ function RecipeDetails() {
         </div>
       )}
       <button
+        className="start-recipe-btn"
         data-testid="start-recipe-btn"
         type="button"
         onClick={ onHandleStart }

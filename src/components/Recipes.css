@@ -25,9 +25,11 @@
   .recipes-main-content {
     display: flex;
     flex-flow: wrap;
+    height: 450px;
     justify-content: center;
-    padding: 10rem 0 2.5rem;
-
+    margin-top: 9.7rem;
+    overflow-y: scroll;
+    padding: 0 0 1rem;
   }
 
   .recipes-main-content a {
@@ -84,3 +86,4 @@
 
   }
 }
+
