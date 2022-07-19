@@ -15,25 +15,27 @@ function RecipeDetails() {
   const youTubeLink = () => detailsItem.strYoutube.replace('watch?v=', '/embed/');
 
   const catchIngedients = useCallback(() => {
-    const measureList = Object.entries(detailsItem)
-      .filter((ingred) => ingred[0].includes('strMeasure'));
+    if (detailsItem) {
+      const measureList = Object.entries(detailsItem)
+        .filter((ingred) => ingred[0].includes('strMeasure'));
 
-    let ingrediente = Object.entries(detailsItem)
-      .filter((ingred) => ingred[0].includes('strIngredient'));
-    if (pathname.includes('/foods')) {
-      ingrediente = ingrediente.filter((f) => f[1] !== '');
-    } else {
-      ingrediente = ingrediente.filter((f) => f[1] !== null);
+      let ingrediente = Object.entries(detailsItem)
+        .filter((ingred) => ingred[0].includes('strIngredient'));
+      if (pathname.includes('/foods')) {
+        ingrediente = ingrediente.filter((f) => f[1] !== '');
+      } else {
+        ingrediente = ingrediente.filter((f) => f[1] !== null);
+      }
+
+      ingrediente = ingrediente.reduce((acc, item, index) => {
+        acc = [...acc, { strIngredient: item[1],
+          strMeasure: measureList[index][1],
+          checked: false }];
+        return acc;
+      }, []);
+
+      setIngredient(ingrediente);
     }
-
-    ingrediente = ingrediente.reduce((acc, item, index) => {
-      acc = [...acc, { strIngredient: item[1],
-        strMeasure: measureList[index][1],
-        checked: false }];
-      return acc;
-    }, []);
-
-    setIngredient(ingrediente);
   }, [detailsItem, pathname]);
 
   useEffect(() => {
@@ -52,18 +54,16 @@ function RecipeDetails() {
     };
     requestRecommendation();
     requestItem();
-  }, [id, pathname, catchIngedients]);
+  }, [id, pathname]);
 
   function onHandleStart() {
     setBtnStart((prev) => !prev);
   }
 
   function onHandleCheck(index) {
-    const newList = [...detailsItem];
-    console.log(detailsItem[index].checked);
-
-    // detailsItem[index].checked = !detailsItem[index].checked;
-    setDetailsItem(newList);
+    const newList = [...ingredient];
+    newList[index].checked = !newList[index].checked;
+    setIngredient(newList);
   }
 
   // function mapStuff() {
@@ -107,7 +107,7 @@ function RecipeDetails() {
             </ul>)
             : (
               <ul>
-                {catchIngedients().map((item, index) => (
+                {ingredient.map((item, index) => (
                   <li
                     key={ index }
                     data-testid={ `${index}-ingredient-name-and-measure` }
@@ -119,6 +119,7 @@ function RecipeDetails() {
                       <input
                         type="checkbox"
                         id={ `indredients${index}` }
+                        checked={ item.checked }
                         onClick={ () => onHandleCheck(index) }
                       />
                       {`${item.strIngredient} - ${item.strMeasure}`}
