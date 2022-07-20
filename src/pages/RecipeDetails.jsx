@@ -15,7 +15,7 @@ function RecipeDetails() {
   const [continueRecip, setContinueRecip] = useState(false);
   const history = useHistory();
 
-  const { doneRecipes, detailsItem, inProgressRecipes } = useContextApp();
+  const { doneRecipes, detailsItem, inProgressRecipes, getLocal } = useContextApp();
 
   const catchIngedients = useCallback(() => {
     if (detailsItem.get) {
@@ -38,7 +38,8 @@ function RecipeDetails() {
   useEffect(() => {
     const initialVerication = () => {
       const pagName = pathname.includes('foods') ? 'meals' : 'cocktails';
-      if (inProgressRecipes.get[pagName][id]) {
+      const localStore = getLocal('inProgressRecipes');
+      if (localStore[pagName][id]) {
         setContinueRecip(true);
       }
     };

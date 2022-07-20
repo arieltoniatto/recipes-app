@@ -21,6 +21,14 @@ function AppProvider({ children }) {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [inProgressRecipes, setInProfressRecipes] = useState(INITIAL_STATE_IN_PROGRESS_R);
 
+  function getLocal(params) {
+    const localStore = localStorage.getItem(params);
+    if (localStore) {
+      return JSON.parse(localStore);
+    }
+    return null;
+  }
+
   useEffect(() => {
     const doneRecipesLocal = localStorage.getItem('doneRecipes');
     if (doneRecipesLocal) return setDoneRecipes(JSON.parse(doneRecipesLocal));
@@ -63,6 +71,7 @@ function AppProvider({ children }) {
       get: detailsItem,
       set: setDetailsItem,
     },
+    getLocal,
   };
 
   return (

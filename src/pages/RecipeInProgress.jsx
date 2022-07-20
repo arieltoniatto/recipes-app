@@ -5,8 +5,9 @@ import requestById from '../services/fetchById';
 import generateIngredient from '../services/generateIngredient';
 
 function RecipeInProgress() {
-  const { detailsItem, inProgressRecipes, doneRecipes } = useContextApp();
+  const { inProgressRecipes, doneRecipes, getLocal } = useContextApp();
   const [ingredients, setIngredients] = useState([]);
+  const [detailsItem, setDetailsItem] = useState({});
   const { id } = useParams();
   const { pathname } = useLocation();
   const [btnDisabled, setBtnDisabled] = useState(true);
@@ -15,15 +16,20 @@ function RecipeInProgress() {
   const pagName = pathname.includes('foods') ? 'meals' : 'cocktails';
   useEffect(() => {
     const initialVerication = () => {
-      if (inProgressRecipes.get[pagName][id]) {
-        setIngredients([...inProgressRecipes.get[pagName][id]]);
+      const localStorege = getLocal('inProgressRecipes');
+      console.log(localStorege);
+      if (localStorege[pagName][id]) {
+        console.log(localStorege[pagName][id]);
+        setIngredients([...localStorege[pagName][id]]);
+      } else {
+        const newList = generateIngredient(detailsItem);
+        setIngredients(newList);
       }
     };
     const requestItem = async () => {
       const request = await requestById(pagName, id);
-      const newList = generateIngredient(request[0]);
-      setIngredients(newList);
-      detailsItem.set({ ...request[0], listIngred: newList });
+
+      setDetailsItem(request[0]);
       initialVerication();
     };
     requestItem();
@@ -50,39 +56,39 @@ function RecipeInProgress() {
   function onHandleFinish() {
     const type = (pathname.includes('/foods')) ? 'comida' : 'bebida';
     const newRecipesFinish = {
-      id: type === 'comida' ? detailsItem.get.idMeal : detailsItem.get.idDrink,
+      id: type === 'comida' ? detailsItem.idMeal : detailsItem.idDrink,
       type,
-      nationality: detailsItem.get.strArea ? detailsItem.get.strArea : '',
-      category: detailsItem.get.strCategory ? detailsItem.get.strCategory : '',
-      alcoholicOrNot: type === 'bebida' ? detailsItem.get.strAlcoholic : '',
-      name: type === 'comida' ? detailsItem.get.strMeal : detailsItem.get.strDrink,
+      nationality: detailsItem.strArea ? detailsItem.strArea : '',
+      category: detailsItem.strCategory ? detailsItem.strCategory : '',
+      alcoholicOrNot: type === 'bebida' ? detailsItem.strAlcoholic : '',
+      name: type === 'comida' ? detailsItem.strMeal : detailsItem.strDrink,
       image: type === 'comida'
-        ? detailsItem.get.strMealThumb : detailsItem.get.strDrinkThumb,
+        ? detailsItem.strMealThumb : detailsItem.strDrinkThumb,
       doneDate: new Date().toLocaleString(),
-      tags: [...detailsItem.get.strTags.split(',')],
+      tags: [...detailsItem.strTags.split(',')],
     };
-    const newArrayDone = [...doneRecipes.get, newRecipesFinish];
+    const newArrayDone = [...doneRecipes, newRecipesFinish];
     localStorage.setItem('doneRecipes', JSON.stringify(newArrayDone));
   }
 
   return (
     <div className="main-container">
-      {detailsItem.get && (
+      {detailsItem && (
         <div className="container">
           <img
             data-testid="recipe-photo"
             src={
-              detailsItem.get.strMealThumb
-                ? detailsItem.get.strMealThumb : detailsItem.get.strDrinkThumb
+              detailsItem.strMealThumb
+                ? detailsItem.strMealThumb : detailsItem.strDrinkThumb
             }
-            alt={ detailsItem.get.strMeal
-              ? detailsItem.get.strMeal : detailsItem.get.strDrink }
+            alt={ detailsItem.strMeal
+              ? detailsItem.strMeal : detailsItem.strDrink }
           />
           <h1 data-testid="recipe-title">
-            { detailsItem.get.strMeal
-              ? detailsItem.get.strMeal : detailsItem.get.strDrink }
+            { detailsItem.strMeal
+              ? detailsItem.strMeal : detailsItem.strDrink }
           </h1>
-          <p data-testid="recipe-category">{detailsItem.get.strCategory}</p>
+          <p data-testid="recipe-category">{detailsItem.strCategory}</p>
           <ul>
             {ingredients.map((item, index) => (
               <li
@@ -104,7 +110,7 @@ function RecipeInProgress() {
               </li>
             ))}
           </ul>
-          <p data-testid="instructions">{detailsItem.get.strInstructions}</p>
+          <p data-testid="instructions">{detailsItem.strInstructions}</p>
           <button type="button" data-testid="share-btn">Share</button>
           <button type="button" data-testid="favorite-btn">Favorite</button>
           <button
