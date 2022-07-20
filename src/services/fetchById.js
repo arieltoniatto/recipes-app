@@ -5,6 +5,7 @@ const requestById = async (pag, id) => {
     URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     TYPE_REQUEST = 'drinks';
   }
+
   const request = await fetch(URL).then((response) => response.json());
   return request[TYPE_REQUEST];
 };

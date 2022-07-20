@@ -10,10 +10,9 @@ import newMeals from './Mocks/data/newMeals'
 import {mockCategories, mockFetch} from './Mocks/fetchMock';
 import { mealsCateg, drinksCateg } from './Mocks/data/newCategories';
 
+
+
 describe('', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
   test('', async () => {
     // mockFetch(newMeals);
     // mockCategories(mealsCateg)

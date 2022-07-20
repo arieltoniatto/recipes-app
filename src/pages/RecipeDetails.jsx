@@ -111,7 +111,7 @@ function RecipeDetails() {
               detailsItem.get.strMealThumb
                 ? detailsItem.get.strMealThumb : detailsItem.get.strDrinkThumb
             }
-            alt={ detailsItem.get.strMea
+            alt={ detailsItem.get.strMeal
               ? detailsItem.get.strMeal : detailsItem.get.strDrink }
           />
           <div>

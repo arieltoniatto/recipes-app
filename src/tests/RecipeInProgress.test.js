@@ -3,55 +3,80 @@ import renderWithRouter from './helpers/renderWithRouter'
 import App from '../App'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import gigaMock from './Mocks/fetchMock'
+
+const localStorageMock = (() => {
+  let store = {};
+  return {
+    getItem(key) {
+      return store[key];
+    },
+    setItem(key, value) {
+      store[key] = value.toString();
+    },
+    clear() {
+      store = {};
+    },
+    removeItem(key) {
+      delete store[key];
+    }
+  };
+})();
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock
+});
+
 
 describe('', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  })
   test('', async () => {
-    // renderWithRouter(<App />, ['/foods/53060/in-progress'])
+    gigaMock('themeal', '52771')
+    renderWithRouter(<App />, ['/foods/52771/in-progress'])
 
-    // const shareBtn = await screen.findByRole('button', {
-    //   name: /share/i
-    // })
-    // const favBtn = screen.getByRole('button', {
-    //   name: /favorite/i
-    // })
-    // const finishBtn = await screen.findByRole('button', {
-    //   name: /finish recipe/i
-    // })
+   const ingred1 = await screen.findByRole('checkbox', {
+    name: /penne rigate \- 1 pound/i })
+   const ingred2 = await screen.findByRole('checkbox', {
+    name:/olive oil \- 1\/4 cup/i })
+   const ingred3 = await screen.findByRole('checkbox', {
+    name: /garlic \- 3 cloves/i })
+   const ingred4 = await screen.findByRole('checkbox', {
+    name:/chopped tomatoes \- 1 tin/i })
+   const ingred5 = await screen.findByRole('checkbox', {
+    name:/red chile flakes \- 1\/2 teaspoon/i })
+   const ingred6 = await screen.findByRole('checkbox', {
+    name:/italian seasoning \- 1\/2 teaspoon/i })
+   const ingred7 = await screen.findByRole('checkbox', {
+    name:/basil \- 6 leaves/i })
+   const ingred8 = await screen.findByRole('checkbox', {
+    name:/parmigiano\-reggiano \- spinkling/i })
 
-    // expect(shareBtn).toBeInTheDocument()
-    // expect(favBtn).toBeInTheDocument()
-    // // expect(finishBtn).toBeDisabled()
+   const allingred = await screen.findAllByTestId(/ingredient-name-and-measure/i)
 
-    // // const checkOne = await screen.findByRole('checkbox', {
-    // //   name: /filo pastry \- 1 packet/i
-    // // })
-    // // const checkTwo = await screen.findByRole('checkbox', {
-    // //   name: /minced beef \- 150g/i
-    // // })
-    // // const checkThree = await screen.findByRole('checkbox', {
-    // //   name: /onion \- 150g/i
-    // // })
-    // // const checkFour = await screen.findByRole('checkbox', {
-    // //   name: /oil \- 40g/i
-    // // })
-    // // const checkFive = await screen.findByRole('checkbox', {
-    // //   name: /salt \- dash/i
-    // // })
-    // // const checkSix = await screen.findByRole('checkbox', {
-    // //   name: /pepper \- dash/i
-    // // })
+   expect(allingred.length).toBe(8)
 
-    // userEvent.click(checkOne)
-    // userEvent.click(checkTwo)
-    // userEvent.click(checkThree)
-    // userEvent.click(checkFour)
-    // userEvent.click(checkFive)
-    // userEvent.click(checkSix)
+   const finishBtn = await screen.findByRole('button', {
+    name: /finish recipe/i
+  })
+   
+   expect(finishBtn).toBeDisabled()
 
-    // expect(finishBtn).not.toBeDisabled()
+   userEvent.click(ingred1)
+   userEvent.click(ingred2)
+   userEvent.click(ingred3)
+   userEvent.click(ingred4)
+   userEvent.click(ingred5)
+   userEvent.click(ingred6)
+   userEvent.click(ingred7)
+   userEvent.click(ingred8)
 
-    // userEvent.click(checkFour)
+   expect(finishBtn).not.toBeDisabled()
 
-    // expect(finishBtn).toBeDisabled()
+   const imgEl = await screen.findByTestId('recipe-photo')
+   expect(imgEl).toBeInTheDocument()
+   expect(imgEl).toHaveAttribute('src', 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg')
+   expect(imgEl).toHaveAttribute('alt', "Spicy Arrabiata Penne")
+
   })
 })

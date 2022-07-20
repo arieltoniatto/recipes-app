@@ -34,8 +34,8 @@ describe('testing recipe details', () => {
     localStorage.setItem('mealsToken', JSON.stringify(1))
     localStorage.setItem('cocktailsToken', JSON.stringify(1))
     localStorage.setItem('user', JSON.stringify({ email: ''}))
-    localStorage.setItem('doneRecipes', JSON.stringify([]))
-    localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: 52772 }]))
+    // localStorage.setItem('doneRecipes', JSON.stringify([]))
+    // localStorage.setItem('favoriteRecipes', JSON.stringify([{ 'id': '52771' }]))
     localStorage.setItem('inProgressRecipes', JSON.stringify({}))
   });
   afterEach(() => {
@@ -53,6 +53,7 @@ describe('testing recipe details', () => {
     const ingredAndMeasureEl = await screen.findAllByTestId(/ingredient-name-and-measure/i)
     const videoEl = screen.getByTitle(/youtube video player/i)
 
+    expect(imgEl).toHaveAttribute('alt', 'Spicy Arrabiata Penne')
     expect(videoEl).toBeInTheDocument()
     expect(titileEl).toBeInTheDocument()
     expect(imgEl).toBeInTheDocument()
@@ -101,7 +102,7 @@ describe('testing recipe details', () => {
     const newRecipesFinish = [{
       id: "52771",
     }]
-    global.localStorage.setItem('doneRecipes', JSON.stringify(newRecipesFinish))
+    localStorage.setItem('doneRecipes', JSON.stringify(newRecipesFinish))
     renderWithRouter(<App />, ['/foods/52771'])
 
     const startRecipeBtn = screen.queryByRole('button', {
@@ -114,7 +115,7 @@ describe('testing recipe details', () => {
   })
   test('verify if the continue recipe button appear after youve started a recipe', () => {
     gigaMock('thecocktail', '178319')
-    global.localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: { 178319: []}, meals: {}}))
+    global.localStorage.setItem('inProgressRecipes', JSON.stringify({ 'cocktails': { '178319': []}, 'meals': {}}))
     renderWithRouter(<App />, ['/drinks/178319'])
 
     const continueRecipeBtn = screen.getByRole('button', { name: /Continue Recipe/i})
@@ -149,18 +150,30 @@ describe('testing recipe details', () => {
     
     expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg')
     userEvent.click(favBtn)
-    localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: 178319 }]))
     expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
+    userEvent.click(favBtn)
+     expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg')
   })
-  // test.only('', async () => {
-  //   gigaMock('themeal', '52771')
-  //   localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: 52771 }]))
-  //   renderWithRouter(<App />, ['/foods/52771'])
+  test('verify if the favorite icon appears as favorited', async () => {
+    gigaMock('themeal', '52771')
+    localStorage.setItem('favoriteRecipes', JSON.stringify([{ 'id': '52771' }]))
+    renderWithRouter(<App />, ['/foods/52771'])
 
-    
+      const favBtn = await screen.findByTestId('favorite-btn')
 
-  //     const favBtn = await screen.findByTestId('favorite-btn')
-  //     expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
+      expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
+      userEvent.click(favBtn)
+      expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg')
+      userEvent.click(favBtn)
+      expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
+  })
+  // test('', async () => {
+  //   gigaMock('thecocktail', '178319')
+  //   localStorage.setItem('favoriteRecipes', JSON.stringify([{ 'id': '178319' }]))
+  //   renderWithRouter(<App />, ['/drinks/178319'])
 
+  //   const favBtn = await screen.findByTestId('favorite-btn')
+
+  //   expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
   // })
 })
