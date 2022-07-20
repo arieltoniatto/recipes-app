@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import copy from 'clipboard-copy';
-import { useLocation, useParams, useHistory } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import './RecipeInProgress.css';
 import useContextApp from '../hooks/useContextApp';
 import requestById from '../services/fetchById';
 import generateIngredient from '../services/generateIngredient';
@@ -15,7 +16,6 @@ function RecipeInProgress() {
   const { id } = useParams();
   const { pathname } = useLocation();
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const history = useHistory();
 
   const pagName = pathname.includes('foods') ? 'meals' : 'cocktails';
   useEffect(() => {
@@ -137,18 +137,13 @@ function RecipeInProgress() {
           </ul>
           <p data-testid="instructions">{detailsItem.strInstructions}</p>
           <button
+            className="finish-recipe-btn"
             type="button"
             data-testid="finish-recipe-btn"
             disabled={ btnDisabled }
             onClick={ onHandleFinish }
           >
             Finish Recipe
-          </button>
-          <button
-            onClick={ () => history.push('/') }
-            type="button"
-          >
-            Vltar para testar
           </button>
         </div>
       )}
