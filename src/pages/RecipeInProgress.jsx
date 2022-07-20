@@ -44,10 +44,12 @@ function RecipeInProgress() {
         [pagName]: { ...inProgressRecipes[pagName], [id]: ingredients } };
       localStorage.setItem('inProgressRecipes', JSON.stringify(newRecipesInProg));
     }
+    if (ingredients.every((item) => item.checked === true)) {
+      setBtnDisabled(false);
+    } else if (!btnDisabled) setBtnDisabled(true);
   }, [ingredients, id, pagName]);
 
   async function onHandleCheck(index) {
-    console.log(ingredients);
     const newList = [...ingredients];
     newList[index].checked = !newList[index].checked;
     setIngredients(newList);

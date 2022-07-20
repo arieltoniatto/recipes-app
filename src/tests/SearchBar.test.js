@@ -89,11 +89,11 @@ describe('testing search bar', () => {
     const nameRadioEl = screen.getByTestId('name-search-radio')
 
     userEvent.click(nameRadioEl)
-    userEvent.type(textInputEl, 'dry martini')
+    userEvent.type(textInputEl, 'A1')
     userEvent.click(btnEl)
 
     await waitFor(() => {
-      expect(history.location.pathname).toBe('/drinks/11005')
+      expect(history.location.pathname).toBe('/drinks/17222')
     }, { timeout: 3000 })
   })
 });
