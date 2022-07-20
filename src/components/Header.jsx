@@ -29,7 +29,7 @@ function Header({ title, perfil, pesquisa }) {
       >
         {title}
       </h1>
-      {pesquisa && (
+      {pesquisa ? (
         <div>
           <input
             className="search-icon"
@@ -40,7 +40,15 @@ function Header({ title, perfil, pesquisa }) {
             type="image"
           />
         </div>
-      )}
+      ) : (
+        <div>
+          <input
+            src={ searchIcon }
+            className="search-icon-2"
+            alt="search icon"
+            type="image"
+          />
+        </div>)}
       {inputState && (
         <SearchBar title={ title } />
       )}
