@@ -7,19 +7,11 @@ const INITIAL_STATE_USER = {
   senha: '',
 };
 
-const INITIAL_STATE_IN_PROGRESS_R = {
-  cocktails: {},
-  meals: {},
-};
-
 function AppProvider({ children }) {
   const [user, setUser] = useState(INITIAL_STATE_USER);
   const [cardsList, setCardList] = useState([]);
   const [detailsItem, setDetailsItem] = useState(null);
   const [uniqueItem, setUniqueItem] = useState({});
-  const [doneRecipes, setDoneRecipes] = useState([]);
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  const [inProgressRecipes, setInProfressRecipes] = useState(INITIAL_STATE_IN_PROGRESS_R);
 
   function getLocal(params) {
     const localStore = localStorage.getItem(params);
@@ -41,18 +33,6 @@ function AppProvider({ children }) {
     uniqueItem: {
       get: uniqueItem,
       set: setUniqueItem,
-    },
-    doneRecipes: {
-      get: doneRecipes,
-      set: setDoneRecipes,
-    },
-    favoriteRecipes: {
-      get: favoriteRecipes,
-      set: setFavoriteRecipes,
-    },
-    inProgressRecipes: {
-      get: inProgressRecipes,
-      set: setInProfressRecipes,
     },
     detailsItem: {
       get: detailsItem,

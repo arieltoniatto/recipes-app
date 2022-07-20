@@ -9,7 +9,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function RecipeInProgress() {
-  const { inProgressRecipes, getLocal } = useContextApp();
+  const { getLocal } = useContextApp();
   const [ingredients, setIngredients] = useState([]);
   const [detailsItem, setDetailsItem] = useState({});
   const [favoriteState, setFavoriteState] = useState(false);
@@ -38,11 +38,13 @@ function RecipeInProgress() {
 
   useEffect(() => {
     if (ingredients.length !== 0) {
-      const newRecipesInProg = { ...inProgressRecipes.get,
-        [pagName]: { ...inProgressRecipes.get[pagName], [id]: ingredients } };
+      const inProgressRecipes = localStorage.getItem('inProgressRecipes') ? JSON
+        .parse(localStorage.getItem('inProgressRecipes')) : {};
+      const newRecipesInProg = { ...inProgressRecipes,
+        [pagName]: { ...inProgressRecipes[pagName], [id]: ingredients } };
       localStorage.setItem('inProgressRecipes', JSON.stringify(newRecipesInProg));
     }
-  }, [ingredients]);
+  }, [ingredients, id, pagName]);
 
   async function onHandleCheck(index) {
     console.log(ingredients);
@@ -75,7 +77,8 @@ function RecipeInProgress() {
   }
 
   function copyLink() {
-    copy(`http://localhost:3000${pathname}`);
+    const replaceName = pathname.replace('/in-progress', '');
+    copy(`http://localhost:3000${replaceName}`);
     setFavoriteState(true);
   }
 
@@ -93,15 +96,14 @@ function RecipeInProgress() {
               ? detailsItem.strMeal : detailsItem.strDrink }
           />
           <div>
-            {favoriteState ? (<p>Link copied!</p>) : (
-              <input
-                type="image"
-                src={ shareIcon }
-                alt="share"
-                data-testid="share-btn"
-                onClick={ copyLink }
-              />
-            )}
+            { favoriteState && (<p>Link copied!</p>) }
+            <input
+              type="image"
+              src={ shareIcon }
+              alt="share"
+              data-testid="share-btn"
+              onClick={ copyLink }
+            />
             <input
               type="image"
               src={ whiteHeartIcon }
@@ -123,6 +125,7 @@ function RecipeInProgress() {
                 <label
                   className={ item.checked ? 'scrached' : 'default' }
                   htmlFor={ `ingredients${index}` }
+                  data-testid={ `${index}-ingredient-step` }
                 >
                   <input
                     type="checkbox"

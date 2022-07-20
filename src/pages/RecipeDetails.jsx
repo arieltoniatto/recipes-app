@@ -19,7 +19,7 @@ function RecipeDetails() {
   const [favoriteState, setFavoriteState] = useState(false);
   const history = useHistory();
 
-  const { doneRecipes, detailsItem, getLocal } = useContextApp();
+  const { detailsItem, getLocal } = useContextApp();
 
   const catchIngedients = useCallback(() => {
     if (detailsItem.get) {
@@ -31,13 +31,15 @@ function RecipeDetails() {
 
   useEffect(() => {
     const verificaReceita = () => {
-      if (doneRecipes.get.some((item) => item.id === id)) {
+      const doneRecipes = localStorage.getItem('doneRecipes') ? JSON
+        .parse(localStorage.getItem('doneRecipes')) : [];
+      if (doneRecipes.some((item) => item.id === id)) {
         setDone(true);
       }
     };
     verificaReceita();
     catchIngedients();
-  }, [catchIngedients, doneRecipes.get, id]);
+  }, [catchIngedients, id]);
 
   useEffect(() => {
     const initialVerication = () => {
@@ -84,15 +86,14 @@ function RecipeDetails() {
               ? detailsItem.get.strMeal : detailsItem.get.strDrink }
           />
           <div>
-            {favoriteState ? (<p>Link copied!</p>) : (
-              <input
-                type="image"
-                src={ shareIcon }
-                alt="share"
-                data-testid="share-btn"
-                onClick={ copyLink }
-              />
-            )}
+            {favoriteState && (<p>Link copied!</p>) }
+            <input
+              type="image"
+              src={ shareIcon }
+              alt="share"
+              data-testid="share-btn"
+              onClick={ copyLink }
+            />
             <input
               type="image"
               src={ whiteHeartIcon }
