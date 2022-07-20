@@ -8,7 +8,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function RecipeInProgress() {
-  const { inProgressRecipes, doneRecipes, getLocal } = useContextApp();
+  const { inProgressRecipes, getLocal } = useContextApp();
   const [ingredients, setIngredients] = useState([]);
   const [detailsItem, setDetailsItem] = useState({});
   const [favoriteState, setFavoriteState] = useState(false);
@@ -56,6 +56,8 @@ function RecipeInProgress() {
   }
   function onHandleFinish() {
     const type = (pathname.includes('/foods')) ? 'comida' : 'bebida';
+    const done = localStorage.getItem('doneRecipes') ? JSON
+      .parse(localStorage.getItem('doneRecipes')) : [];
     const newRecipesFinish = {
       id: type === 'comida' ? detailsItem.idMeal : detailsItem.idDrink,
       type,
@@ -66,9 +68,9 @@ function RecipeInProgress() {
       image: type === 'comida'
         ? detailsItem.strMealThumb : detailsItem.strDrinkThumb,
       doneDate: new Date().toLocaleString(),
-      tags: [...detailsItem.strTags.split(',')],
+      tags: detailsItem.strTags ? [...detailsItem.strTags.split(',')] : [],
     };
-    const newArrayDone = [...doneRecipes, newRecipesFinish];
+    const newArrayDone = [...done, newRecipesFinish];
     localStorage.setItem('doneRecipes', JSON.stringify(newArrayDone));
   }
 
@@ -128,7 +130,7 @@ function RecipeInProgress() {
                     checked={ item.checked }
                     onChange={ () => onHandleCheck(index) }
                   />
-                  {`${item.strIngredient} - ${item.strMeasure}`}
+                  {`${item.strIngredient} ${item.strMeasure}`}
                 </label>
               </li>
             ))}

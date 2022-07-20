@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import appContext from './appContext';
 
@@ -28,19 +28,6 @@ function AppProvider({ children }) {
     }
     return {};
   }
-
-  useEffect(() => {
-    const doneRecipesLocal = localStorage.getItem('doneRecipes');
-    if (doneRecipesLocal) return setDoneRecipes(JSON.parse(doneRecipesLocal));
-
-    const favoriteRecipesLocal = localStorage.getItem('favoriteRecipes');
-    if (favoriteRecipesLocal) return setFavoriteRecipes(JSON.parse(favoriteRecipesLocal));
-
-    const inProgressRecipesLocal = localStorage.getItem('inProgressRecipes');
-    if (inProgressRecipesLocal) {
-      return setInProfressRecipes(JSON.parse(inProgressRecipesLocal));
-    }
-  }, []);
 
   const appData = {
     user: {

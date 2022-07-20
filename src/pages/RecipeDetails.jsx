@@ -113,7 +113,7 @@ function RecipeDetails() {
                 key={ index }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
-                {`${item.strIngredient} - ${item.strMeasure}`}
+                {`${item.strIngredient} ${item.strMeasure}`}
               </li>
             ))}
           </ul>

@@ -8,7 +8,7 @@ function generateIngredient(detailsItem) {
       listIngred = [
         ...listIngred,
         { strIngredient: detailsItem[strIngredient],
-          strMeasure: detailsItem[strMeasure],
+          strMeasure: detailsItem[strMeasure] ? ` - ${detailsItem[strMeasure]}` : '',
           checked: false }];
     }
   }
