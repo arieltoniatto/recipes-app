@@ -10,7 +10,16 @@ const INITIAL_STATE_USER = {
 function AppProvider({ children }) {
   const [user, setUser] = useState(INITIAL_STATE_USER);
   const [cardsList, setCardList] = useState([]);
+  const [detailsItem, setDetailsItem] = useState(null);
   const [uniqueItem, setUniqueItem] = useState({});
+
+  function getLocal(params) {
+    const localStore = localStorage.getItem(params);
+    if (localStore) {
+      return JSON.parse(localStore);
+    }
+    return {};
+  }
 
   const appData = {
     user: {
@@ -25,6 +34,11 @@ function AppProvider({ children }) {
       get: uniqueItem,
       set: setUniqueItem,
     },
+    detailsItem: {
+      get: detailsItem,
+      set: setDetailsItem,
+    },
+    getLocal,
   };
 
   return (
