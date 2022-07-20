@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import requestById from '../services/fetchById';
 import './RecipeDetails.css';
 import fetchRecommendation from '../services/fetchRecommendation';
 import useContextApp from '../hooks/useContextApp';
 import generateIngredient from '../services/generateIngredient';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -13,9 +16,10 @@ function RecipeDetails() {
   const [ingredient, setIngredient] = useState([]);
   const [done, setDone] = useState(false);
   const [continueRecip, setContinueRecip] = useState(false);
+  const [favoriteState, setFavoriteState] = useState(false);
   const history = useHistory();
 
-  const { doneRecipes, detailsItem, inProgressRecipes, getLocal } = useContextApp();
+  const { doneRecipes, detailsItem, getLocal } = useContextApp();
 
   const catchIngedients = useCallback(() => {
     if (detailsItem.get) {
@@ -39,9 +43,7 @@ function RecipeDetails() {
     const initialVerication = () => {
       const pagName = pathname.includes('foods') ? 'meals' : 'cocktails';
       const localStore = getLocal('inProgressRecipes');
-      if (localStore[pagName][id]) {
-        setContinueRecip(true);
-      }
+      if (localStore[pagName] && localStore[pagName][id]) { setContinueRecip(true); }
     };
     initialVerication();
     const requestItem = async () => {
@@ -61,6 +63,11 @@ function RecipeDetails() {
     return history.push(`/drinks/${id}/in-progress`);
   }
 
+  function copyLink() {
+    copy(`http://localhost:3000${pathname}`);
+    setFavoriteState(true);
+  }
+
   const youTubeLink = () => detailsItem.get.strYoutube.replace('watch?v=', '/embed/');
 
   return (
@@ -76,6 +83,23 @@ function RecipeDetails() {
             alt={ detailsItem.get.strMea
               ? detailsItem.get.strMeal : detailsItem.get.strDrink }
           />
+          <div>
+            {favoriteState ? (<p>Link copied!</p>) : (
+              <input
+                type="image"
+                src={ shareIcon }
+                alt="share"
+                data-testid="share-btn"
+                onClick={ copyLink }
+              />
+            )}
+            <input
+              type="image"
+              src={ whiteHeartIcon }
+              alt="favorite"
+              data-testid="favorite-btn"
+            />
+          </div>
           <h1 data-testid="recipe-title">
             { detailsItem.get.strMeal
               ? detailsItem.get.strMeal : detailsItem.get.strDrink }

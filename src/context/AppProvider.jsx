@@ -26,7 +26,7 @@ function AppProvider({ children }) {
     if (localStore) {
       return JSON.parse(localStore);
     }
-    return null;
+    return {};
   }
 
   useEffect(() => {
