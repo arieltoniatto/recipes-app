@@ -11,7 +11,6 @@ import gigaMock from './Mocks/fetchMock';
 
 describe('', () => {
   test('', async () => {
-    gigaMock('themeal')
     renderWithRouter(<App />, ['/foods'])
 
     const beefBtn = await screen.findByRole('button', {
@@ -48,7 +47,6 @@ describe('', () => {
     expect(cardnameEl.length).toBe(12)
   })
   test('', async () => {
-    gigaMock('thecocktail')
     renderWithRouter(<App />, ['/drinks'])
 
     const ordinaryBtn = await screen.findByRole('button', {
