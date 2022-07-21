@@ -11,7 +11,7 @@ const oneDrink = {
       'strDrinkZH-HANT': null,
       'strTags': null,
       'strVideo': null,
-      'strCategory': 'Cocktail',
+      'strCategory': null,
       'strIBA': null,
       'strAlcoholic': 'Alcoholic',
       'strGlass': 'Martini Glass',

@@ -3,20 +3,14 @@ import userEvent from '@testing-library/user-event';
 import React from 'react'
 import App from '../App'
 import renderWithRouter from './helpers/renderWithRouter';
-import goatMeals from './Mocks/data/goatMeals'
-import drinks from './Mocks/data/drinks'
-import ordinaryDrinks from './Mocks/data/ordinaryDrinks';
-import newMeals from './Mocks/data/newMeals'
-import {mockCategories, mockFetch} from './Mocks/fetchMock';
-import { mealsCateg, drinksCateg } from './Mocks/data/newCategories';
+import gigaMock from './Mocks/fetchMock';
+;
+
+
+
 
 describe('', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
   test('', async () => {
-    // mockFetch(newMeals);
-    // mockCategories(mealsCateg)
     renderWithRouter(<App />, ['/foods'])
 
     const beefBtn = await screen.findByRole('button', {
@@ -53,8 +47,6 @@ describe('', () => {
     expect(cardnameEl.length).toBe(12)
   })
   test('', async () => {
-    mockFetch(ordinaryDrinks)
-    mockCategories(drinksCateg)
     renderWithRouter(<App />, ['/drinks'])
 
     const ordinaryBtn = await screen.findByRole('button', {

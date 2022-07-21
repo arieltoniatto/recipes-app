@@ -8,6 +8,7 @@ import useContextApp from '../hooks/useContextApp';
 import generateIngredient from '../services/generateIngredient';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIconfrom from '../images/blackHeartIcon.svg';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -16,7 +17,8 @@ function RecipeDetails() {
   const [ingredient, setIngredient] = useState([]);
   const [done, setDone] = useState(false);
   const [continueRecip, setContinueRecip] = useState(false);
-  const [favoriteState, setFavoriteState] = useState(false);
+  const [copyState, setcopyState] = useState(false);
+  const [favoriteState, setFavotiteState] = useState(false);
   const history = useHistory();
 
   const { detailsItem, getLocal } = useContextApp();
@@ -46,6 +48,11 @@ function RecipeDetails() {
       const pagName = pathname.includes('foods') ? 'meals' : 'cocktails';
       const localStore = getLocal('inProgressRecipes');
       if (localStore[pagName] && localStore[pagName][id]) { setContinueRecip(true); }
+      const listFavorit = localStorage.getItem('favoriteRecipes') ? JSON
+        .parse(localStorage.getItem('favoriteRecipes')) : [];
+      if (listFavorit.some((item) => item.id === id)) {
+        setFavotiteState(true);
+      }
     };
     initialVerication();
     const requestItem = async () => {
@@ -67,10 +74,32 @@ function RecipeDetails() {
 
   function copyLink() {
     copy(`http://localhost:3000${pathname}`);
-    setFavoriteState(true);
+    setcopyState(true);
   }
 
   const youTubeLink = () => detailsItem.get.strYoutube.replace('watch?v=', '/embed/');
+
+  function choseFavorit() {
+    let listFavorit = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (listFavorit.some((item) => item.id === id)) {
+      listFavorit = listFavorit.filter((item) => item.id !== id);
+    } else {
+      const type = (pathname.includes('/foods')) ? 'food' : 'drink';
+      const newObjFavorit = {
+        id,
+        type,
+        nationality: detailsItem.get.strArea ? detailsItem.get.strArea : '',
+        category: detailsItem.get.strCategory ? detailsItem.get.strCategory : '',
+        alcoholicOrNot: type === 'drink' ? detailsItem.get.strAlcoholic : '',
+        name: type === 'food' ? detailsItem.get.strMeal : detailsItem.get.strDrink,
+        image: type === 'food'
+          ? detailsItem.get.strMealThumb : detailsItem.get.strDrinkThumb,
+      };
+      listFavorit = [...listFavorit, newObjFavorit];
+    }
+    localStorage.setItem('favoriteRecipes', JSON.stringify(listFavorit));
+    setFavotiteState((prev) => !prev);
+  }
 
   return (
     <div className="main-container">
@@ -82,11 +111,11 @@ function RecipeDetails() {
               detailsItem.get.strMealThumb
                 ? detailsItem.get.strMealThumb : detailsItem.get.strDrinkThumb
             }
-            alt={ detailsItem.get.strMea
+            alt={ detailsItem.get.strMeal
               ? detailsItem.get.strMeal : detailsItem.get.strDrink }
           />
           <div>
-            {favoriteState && (<p>Link copied!</p>) }
+            {copyState && (<p>Link copied!</p>) }
             <input
               type="image"
               src={ shareIcon }
@@ -96,9 +125,10 @@ function RecipeDetails() {
             />
             <input
               type="image"
-              src={ whiteHeartIcon }
+              src={ favoriteState ? blackHeartIconfrom : whiteHeartIcon }
               alt="favorite"
               data-testid="favorite-btn"
+              onClick={ choseFavorit }
             />
           </div>
           <h1 data-testid="recipe-title">

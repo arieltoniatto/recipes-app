@@ -1,26 +1,64 @@
 import React from 'react'
 import renderWithRouter from './helpers/renderWithRouter'
 import App from '../App'
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { mockId } from './Mocks/fetchMock'
+import drinkB from './Mocks/dataMocks/drink13332'
+import gigaMock from './Mocks/fetchMock'
+
+const localStorageMock = (() => {
+  let store = {};
+  return {
+    getItem(key) {
+      return store[key];
+    },
+    setItem(key, value) {
+      store[key] = value.toString();
+    },
+    clear() {
+      store = {};
+    },
+    removeItem(key) {
+      delete store[key];
+    }
+  };
+})();
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock
+});
 
 describe('testing recipe details', () => {
-  test('verify if the start recipe button is working propperl', async () => {
-    const { history } = renderWithRouter(<App />, ['/foods/52977'])
+
+  beforeEach(() => {
+    localStorage.setItem('mealsToken', JSON.stringify(1))
+    localStorage.setItem('cocktailsToken', JSON.stringify(1))
+    localStorage.setItem('user', JSON.stringify({ email: ''}))
+    // localStorage.setItem('doneRecipes', JSON.stringify([]))
+    // localStorage.setItem('favoriteRecipes', JSON.stringify([{ 'id': '52771' }]))
+    localStorage.setItem('inProgressRecipes', JSON.stringify({}))
+  });
+  afterEach(() => {
+    jest.resetAllMocks();
+  })
+  test('verify if the start recipe button is working propperly', async () => {
+    gigaMock('themeal', '52771')
+    const { history } = renderWithRouter(<App />, ['/foods/52771'])
 
     const titileEl = await screen.findByRole('heading', {
-      name: /corba/i, level: 1
+      name: /Spicy Arrabiata Penne/i, level: 1
     })
     const imgEl = await screen.findByTestId('recipe-photo')
     const categEl = await screen.findByTestId('recipe-category')
     const ingredAndMeasureEl = await screen.findAllByTestId(/ingredient-name-and-measure/i)
     const videoEl = screen.getByTitle(/youtube video player/i)
 
+    expect(imgEl).toHaveAttribute('alt', 'Spicy Arrabiata Penne')
     expect(videoEl).toBeInTheDocument()
     expect(titileEl).toBeInTheDocument()
     expect(imgEl).toBeInTheDocument()
     expect(categEl).toBeInTheDocument()
-    expect(ingredAndMeasureEl.length).toBe(13)
+    expect(ingredAndMeasureEl.length).toBe(8)
 
     const recomendationsEls = await screen.findAllByTestId(/recomendation-card/i)
     const recomendationsTitleEl = await screen.findAllByTestId(/recomendation-title/i)
@@ -32,18 +70,19 @@ describe('testing recipe details', () => {
       name: /start recipe/i
     })
     userEvent.click(startRecipeBtn)
-    expect(history.location.pathname).toBe('/foods/52977/in-progress')
+    expect(history.location.pathname).toBe('/foods/52771/in-progress')
 
   })
   test('', async () => {
-    const { history } = renderWithRouter(<App />, ['/drinks/17222'])
+    gigaMock('thecocktail', '178319')
+    const { history } = renderWithRouter(<App />, ['/drinks/178319'])
 
     const recipeCateg = await screen.findByText(/alcoholic/i)
     const ingredAndMeasureEl = await screen.findAllByTestId(/ingredient-name-and-measure/i)
     const videoEl = screen.queryByTitle(/youtube video player/i)
 
     expect(videoEl).not.toBeInTheDocument()
-    expect(ingredAndMeasureEl.length).toBe(4)
+    expect(ingredAndMeasureEl.length).toBe(3)
     expect(recipeCateg).toBeInTheDocument()
 
     const recomendationsEls = await screen.findAllByTestId(/recomendation-card/i)
@@ -56,27 +95,85 @@ describe('testing recipe details', () => {
       name: /start recipe/i
     })
     userEvent.click(startRecipeBtn)
-    expect(history.location.pathname).toBe('/drinks/17222/in-progress')
+    expect(history.location.pathname).toBe('/drinks/178319/in-progress')
   })
-  test('verify if the start recipe button doesnt appear after youve done the recipe', () => {
+  test('verify if the start/continue recipe button doesnt appear in /foods after youve done the recipe', () => {
+    gigaMock('themeal', '52771')
     const newRecipesFinish = [{
-      id: "52978",
+      id: "52771",
     }]
-    global.localStorage.setItem('doneRecipes', JSON.stringify(newRecipesFinish))
-    renderWithRouter(<App />, ['/foods/52978'])
+    localStorage.setItem('doneRecipes', JSON.stringify(newRecipesFinish))
+    renderWithRouter(<App />, ['/foods/52771'])
 
     const startRecipeBtn = screen.queryByRole('button', {
       name: /start recipe/i
     })
+    const continueRecipeBtn = screen.queryByRole('button', { name: /Continue Recipe/i})
 
+    expect(continueRecipeBtn).not.toBeInTheDocument()
     expect(startRecipeBtn).not.toBeInTheDocument()
   })
-  test('', async () => {
-    global.localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: { 53026: [] }}))
-    renderWithRouter(<App />, ['/foods/53026'])
+  test('verify if the continue recipe button appear after youve started a recipe', () => {
+    gigaMock('thecocktail', '178319')
+    global.localStorage.setItem('inProgressRecipes', JSON.stringify({ 'cocktails': { '178319': []}, 'meals': {}}))
+    renderWithRouter(<App />, ['/drinks/178319'])
 
-    const continueRecipeBtn = await screen.findByRole('button', { name: /Continue Recipe/i}, {timeout: 3000})
+    const continueRecipeBtn = screen.getByRole('button', { name: /Continue Recipe/i})
 
     expect(continueRecipeBtn).toBeInTheDocument()
   })
+  test('verify if the share button is working', async () => {
+    gigaMock('thecocktail', '178319')
+    renderWithRouter(<App />, ['/drinks/178319'])
+    Object.assign(window.navigator, {
+      clipboard: {
+        writeText: jest.fn().mockImplementation(() => Promise.resolve()),
+      },
+    });
+
+    const shareBtn = await screen.findByRole('button', {
+      name: /share/i
+    })
+
+    
+    expect(shareBtn).toBeInTheDocument()
+    
+    userEvent.click(shareBtn)
+  })
+  test('verify is favorite button is working', async () => {
+    gigaMock('thecocktail', '178319')
+    renderWithRouter(<App />, ['/drinks/178319'])
+    
+    const favBtn = await screen.findByTestId('favorite-btn')
+    
+    expect(favBtn).toBeInTheDocument()
+    
+    expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg')
+    userEvent.click(favBtn)
+    expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
+    userEvent.click(favBtn)
+     expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg')
+  })
+  test('verify if the favorite icon appears as favorited', async () => {
+    gigaMock('themeal', '52771')
+    localStorage.setItem('favoriteRecipes', JSON.stringify([{ 'id': '52771' }]))
+    renderWithRouter(<App />, ['/foods/52771'])
+
+      const favBtn = await screen.findByTestId('favorite-btn')
+
+      expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
+      userEvent.click(favBtn)
+      expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg')
+      userEvent.click(favBtn)
+      expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
+  })
+  // test('', async () => {
+  //   gigaMock('thecocktail', '178319')
+  //   localStorage.setItem('favoriteRecipes', JSON.stringify([{ 'id': '178319' }]))
+  //   renderWithRouter(<App />, ['/drinks/178319'])
+
+  //   const favBtn = await screen.findByTestId('favorite-btn')
+
+  //   expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg')
+  // })
 })

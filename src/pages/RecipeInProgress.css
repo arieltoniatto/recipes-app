@@ -1,4 +1,12 @@
-.finish-recipe-btn {
-  bottom: 0;
-  position: fixed;
+@media screen and ( max-width : 360px ) {
+
+  .container img {
+    margin-bottom: 2rem;
+  }
+
+  .finish-recipe-btn {
+    bottom: 0;
+    position: fixed;
+  }
+
 }

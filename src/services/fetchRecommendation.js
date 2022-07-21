@@ -6,7 +6,6 @@ async function fetchRecommendation(pag) {
     URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
     TYPE_REQUEST = 'meals';
   }
-
   const request = await fetch(URL).then((response) => response.json());
   return request[TYPE_REQUEST].slice(0, MAX_LENGTH_LIST);
 }

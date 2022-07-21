@@ -1,0 +1,24 @@
+@media screen and ( max-width : 360px ) {
+
+  .main-container-done {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 7rem 1.2rem;
+  }
+
+  .main-container-done header {
+    position: fixed;
+  }
+
+  .main-container-done img {
+    height: 5rem;
+  }
+
+  .main-container-recipes .card-recipe {
+    border: 2px solid black;
+    display: flex;
+    margin: 1.3rem;
+  }
+}
