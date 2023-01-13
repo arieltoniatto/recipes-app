@@ -25,3 +25,7 @@ Welcome to our Meal and Drink Recipe App! This app was developed as a group proj
 - React Hooks for managing state and handling interactions
 - Context API for managing global state
 - Designed for mobile devices
+
+## Contributions
+- Devis Coelho
+- Bernardo Rodrigues
